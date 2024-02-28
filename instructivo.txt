@@ -1,0 +1,17 @@
+1. pasar archivos
+realizar instalacion 
+	xampp-win32-1.8.0-VC9-installer
+	mysql-workbench-community-6.3.10-winx64
+
+2. abrir localhost/phpmyadmin/
+	cambiar contraseña usuario root 'bxdvsjooLY4B6eKt'
+
+en la carpeta phpmyadmin/config.inc.php, introducir la nueva contraseña
+
+3. en mysql workbench establecer la conexion con el usuario root, bxdvsjooLY4B6eKt
+	crear el schema, e importar la base de datos
+
+4. pasar el codigo a la carpeta htdocs
+5. en el conf de php.ini
+	cambiar error_reporting:
+	E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED

@@ -1,0 +1,7 @@
+/* General */
+   BODY {font-family: verdana,arial, sans-serif; font-size: 10pt; background-image: white;}
+   
+/* Tablas */
+   TH {font-size: 11pt; font-weight: bold; color: black; text-align: center; solid #000000;}
+   TD {font-size: 8pt; color: black; solid #000000;}
+   table {solid #000000; border-collapse: collapse; border-color: black;}  
