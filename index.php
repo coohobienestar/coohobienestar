@@ -13,7 +13,7 @@ if($estado_servidor == 1){
 <html>
 <?xml version="1.0" encoding="UTF-8"?>
 <body>
-<title>SISTEMA DE INFORMACION CONSTRUYAMOS COLOMBIA</title>
+<title>COOHOBIENESTAR</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link rel="stylesheet" type="text/css" href="estilos/estilo.css">
 </head>
@@ -28,7 +28,7 @@ if($estado_servidor == 1){
            <table width="25%" border="0" align="center" cellpadding="0" cellspacing="0">
             <form action="menu.php" method="post">
             <tr>
-            <td align="center" width="100%" colspan="2" ><span class="presentacion2"><img src="imagenes/usuario.png">&nbsp;<strong>INICIAR SESI�N</strong></span></td>
+            <td align="center" width="100%" colspan="2" ><span class="presentacion2"><img src="imagenes/usuario.png">&nbsp;<strong>INICIAR SESION</strong></span></td>
             </tr>
             <tr class="f_form_tabla">
             <td>&nbsp;</td>
@@ -71,7 +71,7 @@ if($estado_servidor == 1){
 
 <html>
 <body>
-<title>SISTEMA DE INFORMACION CONSTRUYAMOS COLOMBIA</title>
+<title>COOHOBIENESTAR</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="estilos/estilo.css">
 </head>
