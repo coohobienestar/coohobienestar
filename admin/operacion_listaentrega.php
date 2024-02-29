@@ -160,7 +160,6 @@ $tipo = $_GET['tipo'];
     $cupos1 = $fila['cupos'];
     $total_cupos = $fila['cupos'] + $total_cupos;
   }
-  echo($total_cupos);
   
   for ($a=0; $a<$nfilas_min; $a++){
     $row_min = mysql_fetch_array($consulta_min);
@@ -386,7 +385,6 @@ $hojaExcel.="<table width='98%'>";
         $row6 = mysql_fetch_array($consulta6);
         
         $cod_rango = $row6['cod_rango_edad'];
-        echo $cod_rango;
         ////BUSCAMOS LOS CUPOS DEL RANGO
         // $instruccion_c ="SELECT cupos AS cupos FROM minuta_escuela WHERE cod_escuela = $cod_escuela AND cod_rango_edad = $cod_rango";                                        
         $instruccion_c = "SELECT calculo_requerimientos.cod_escuela,
