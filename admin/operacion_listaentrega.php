@@ -153,18 +153,24 @@ $tipo = $_GET['tipo'];
   $instruccion_nueva = "SELECT cupos AS cupos FROM item_programacion WHERE cod_programacion = $cod_programacion AND cod_escuela = $cod_escuela";
   $consulta_nueva = mysql_query($instruccion_nueva);
   error_consulta($consulta_nueva,$instruccion_nueva);
-  $row_am = mysql_fetch_array($consulta_nueva);
-  $cupos_programacion = $row_am['cupos'];
+  $numeroFilas = mysql_num_rows($consulta_nueva);
 
+  for($i=0; $i < $numeroFilas; $i++){
+    $fila = mysql_fetch_array($consulta_nueva);
+    $cupos1 = $fila['cupos'];
+    $total_cupos = $fila['cupos'] + $total_cupos;
+  }
+  echo($total_cupos);
+  
   for ($a=0; $a<$nfilas_min; $a++){
     $row_min = mysql_fetch_array($consulta_min);
     $cod_minuta = $row_min['cod_minuta'];
   }
 
   // for ($a=0; $a<$nfilas_min; $a++){
-  //   $row_min = mysql_fetch_array($consulta_min);
+    //   $row_min = mysql_fetch_array($consulta_min);
     
-  //   $cod_minuta = $row_min['cod_minuta'];
+    //   $cod_minuta = $row_min['cod_minuta'];
     
     ////BUSCAMOS LOS CUPOS DE LA JORNADA AM 
 
@@ -180,12 +186,12 @@ $tipo = $_GET['tipo'];
     // $total_cupos_am = $total_cupos_am + $cupos_am;
     
     ////BUSCAMOS LOS CUPOS DE LA JORNADA PM
-  //   $instruccion_pm ="SELECT cupos AS cupos 
-  //                     FROM minuta_escuela 
-  //                     WHERE cod_escuela = $cod_escuela AND cod_jornada = 'PM' AND cod_minuta = $cod_minuta";                                        
-  //   $consulta_pm = mysql_query($instruccion_pm);
-  //   error_consulta($consulta_pm,$instruccion_pm);              
-  //   $row_pm = mysql_fetch_array($consulta_pm); 
+    //   $instruccion_pm ="SELECT cupos AS cupos 
+   //                     FROM minuta_escuela 
+    //                     WHERE cod_escuela = $cod_escuela AND cod_jornada = 'PM' AND cod_minuta = $cod_minuta";                                        
+    //   $consulta_pm = mysql_query($instruccion_pm);
+    //   error_consulta($consulta_pm,$instruccion_pm);              
+    //   $row_pm = mysql_fetch_array($consulta_pm); 
   
   //   $cupos_pm = $row_pm['cupos'];
     
@@ -279,8 +285,8 @@ $hojaExcel.="<table width='98%'' height='80'>";
     $hojaExcel.="<td width='15%'>$nom_departamento</td>";
     $hojaExcel.="<td width='10%'><strong>Municipio</strong></td>";
     $hojaExcel.="<td width='25%'>$nom_municipio</td>";
-    $hojaExcel.="<td width='15%'><strong># Cupos Programados</strong></td>";
-    $hojaExcel.="<td width='4%'>$cupos_programacion</td>";
+    $hojaExcel.="<td width='15%'><strong>Total Cupos Programados</strong></td>";
+    $hojaExcel.="<td width='4%'>$total_cupos</td>";
     // $hojaExcel.="<td width='5%'><strong>AM</strong></td>";
     // $hojaExcel.="<td width='4%'>$total_cupos_am</td>";
     // $hojaExcel.="<td width='5%'><strong>PM</strong></td>";
@@ -360,7 +366,7 @@ $hojaExcel.="<table width='98%'>";
         $nom_rango = $row6['nombre'];
         $nom_rango = $nom_rango;
         
-        $hojaExcel.="<td align='center'>$nom_rango</td>";        
+        $hojaExcel.="<td align='center'>$nom_rango</td>";      
        } 
    $hojaExcel.="</tr>";                                         
    $hojaExcel.="<tr>";
