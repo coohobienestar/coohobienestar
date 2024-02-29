@@ -154,7 +154,7 @@ $tipo = $_GET['tipo'];
   $consulta_nueva = mysql_query($instruccion_nueva);
   error_consulta($consulta_nueva,$instruccion_nueva);
   $numeroFilas = mysql_num_rows($consulta_nueva);
-
+  $total_cupos = 0;
   for($i=0; $i < $numeroFilas; $i++){
     $fila = mysql_fetch_array($consulta_nueva);
     $cupos1 = $fila['cupos'];
@@ -366,7 +366,7 @@ $hojaExcel.="<table width='98%'>";
         $nom_rango = $row6['nombre'];
         $nom_rango = $nom_rango;
         
-        $hojaExcel.="<td align='center'>$nom_rango</td>";      
+        $hojaExcel.="<td  width='18%' align='center'>$nom_rango</td>";      
        } 
    $hojaExcel.="</tr>";                                         
    $hojaExcel.="<tr>";
@@ -384,16 +384,22 @@ $hojaExcel.="<table width='98%'>";
       
       for ($i=0; $i<$nfilas6; $i++){
         $row6 = mysql_fetch_array($consulta6);
-
-        $cod_rango = $row6['cod_rango_edad'];
         
+        $cod_rango = $row6['cod_rango_edad'];
+        echo $cod_rango;
         ////BUSCAMOS LOS CUPOS DEL RANGO
-        $instruccion_c ="SELECT cupos AS cupos FROM minuta_escuela WHERE cod_escuela = $cod_escuela AND cod_rango_edad = $cod_rango";                                        
+        // $instruccion_c ="SELECT cupos AS cupos FROM minuta_escuela WHERE cod_escuela = $cod_escuela AND cod_rango_edad = $cod_rango";                                        
+        $instruccion_c = "SELECT calculo_requerimientos.cod_escuela,
+        calculo_requerimientos.cod_rango_edad,
+        calculo_requerimientos.cupos
+        From calculo_requerimientos 
+        inner join rango_edad on calculo_requerimientos.cod_rango_edad = $cod_rango
+        where cod_programacion = $cod_programacion and cod_escuela = $cod_escuela Limit 1";
         $consulta_c = mysql_query($instruccion_c);
         error_consulta($consulta_c,$instruccion_c);              
         $row_c = mysql_fetch_array($consulta_c); 
 
-        $hojaExcel.="<td align='center'>$cupos_programacion</td>";            
+        $hojaExcel.="<td align='center'>$row_c[cupos]</td>";            
        }        
   $hojaExcel.="</tr>";
   $hojaExcel.="<tr>";
@@ -526,7 +532,7 @@ $hojaExcel.="<table width='98%'>";
 
             // $hojaExcel.="<td align='center'>$row_qt[cantidad]</td>";
            }  
-        $hojaExcel.="<td align='center'>$cantidad</td>";   
+        $hojaExcel.="<td colspan='$nfilas_re' align='center'>$cantidad</td>";   
  
         ////BUSCAMOS LOS INGREDIENTES
         $instruccion8 ="SELECT calculo_redondeado_escuela.cod_unidad_medida AS cod_unidad_medida, unidad_medida.nombre AS nom_unidad, 
