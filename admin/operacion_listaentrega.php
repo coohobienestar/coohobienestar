@@ -325,6 +325,11 @@ for ($i=0; $i<$nfilasConsulta; $i++){
   $row6 = mysql_fetch_array($querysNombreMenu);
   $nombre_Menus = $row6['nombre_menu']; 
  }
+#consulta para saber si existen intermbios en la programacion
+$intercambio_programacion = "SELECT cod_programacion FROM sicc24.intercambios WHERE cod_programacion = $cod_programacion";
+$consulta_int_programacion = mysql_query($intercambio_programacion);
+error_consulta($consulta_int_programacion,$intercambio_programacion);
+$nfilas_intercambio_programacion = mysql_num_rows ($consulta_int_programacion);
 
 $hojaExcel.="<table width='98%'>";
   $hojaExcel.="<tr>";
@@ -337,10 +342,14 @@ $hojaExcel.="<table width='98%'>";
   $hojaExcel.="<tr>";
     $hojaExcel.="<th width='2%'  rowspan='4' align='center'>#</th>";
     $hojaExcel.="<th width='20%' rowspan='4' align='center'>Producto</th>";
+    if($nfilas_intercambio_programacion > 0){
+      $hojaExcel.="<th width='20%' rowspan='4' align='center'>Intercambios</th>";
+    }
+
     // $hojaExcel.="<th width='20%' colspan='$nfilas_re' rowspan='3' align='center'>Cantidad de alimento seg�n minuta por grupo de edad</th>";
-    $hojaExcel.="<th width='18%' colspan='$nfilas_re' align='center'>Número de niños por Rango Edad</th>";
+    $hojaExcel.="<th width='20%' colspan='$nfilas_re' align='center'>Número de niños por Rango Edad</th>";
     // $hojaExcel.="<th width='10%' rowspan='4' align='center'>Suma total en unidad de medida GR o CC</th>";
-    $hojaExcel.="<th width='10%' rowspan='4' align='center'>Unidad de compra (libra, kilo, botella, unidad)</th>";
+    $hojaExcel.="<th width='15%' rowspan='4' align='center'>Unidad de compra (libra, kilo, botella, unidad)</th>";
     // $hojaExcel.="<th width='10%' rowspan='4' align='center'>Cantidad a comprar para la unidad</th>";
     $hojaExcel.="<th width='10%' rowspan='4' align='center'>Cantidad entregada en la unidad de servicio</th>";
   $hojaExcel.="</tr>";
@@ -424,6 +433,8 @@ $hojaExcel.="<table width='98%'>";
         $hojaExcel.="<th colspan='$nfilas_re' align='center'>Cantidad de alimentos por número de niños en unidad de medida</td>";  
    $hojaExcel.="</tr>";  
   $hojaExcel.="<tr>";
+
+      //  INICIO DE LA BUSQUEDA DE TODOS LOS INGREDIENTES DE CADA UNIDAD DE SERVICIO
       ////BUSCAMOS LOS INGREDIENTES
       $instruccion7 ="SELECT calculo_requerimientos.cod_ingrediente AS cod_ingrediente, ingrediente.nombre AS nom_ingrediente, 
                       calculo_requerimientos.cod_categoria_ingrediente AS cod_categoria, categoria_ingrediente.nombre AS nom_categoria, 
@@ -461,111 +472,135 @@ $hojaExcel.="<table width='98%'>";
         
         $hojaExcel.="<td>$conse</td>";
         $hojaExcel.="<td>$nom_ingrediente</td>";
-        
-        ////BUSCAMOS LOS RANGOS DE EDAD DE ACUERDO A LA ESCUELA LA PROGRAMACION Y LA MODALIDAD
-        $instruccion6 ="SELECT DISTINCT calculo_requerimientos.cod_rango_edad AS cod_rango_edad, rango_edad.nombre AS nombre
-                        FROM calculo_requerimientos 
-                        INNER JOIN rango_edad ON rango_edad.cod_rango_edad = calculo_requerimientos.cod_rango_edad  
-                        WHERE calculo_requerimientos.cod_programacion = $cod_programacion AND calculo_requerimientos.cod_modalidad = $cod_modalidad
-                          AND calculo_requerimientos.cod_municipio = $cod_municipio AND calculo_requerimientos.cod_escuela = $cod_escuela
-                          AND calculo_requerimientos.cod_tipo_minuta = $cod_tipo_minuta";
-                                 
-        $consulta6 = mysql_query($instruccion6);
-        error_consulta($consulta6,$instruccion6);
-        $nfilas6 = mysql_num_rows ($consulta6);
-        
-        for ($h=0; $h<$nfilas6; $h++){             
-          $row6 = mysql_fetch_array($consulta6);
-          
-          $cod_rango = $row6['cod_rango_edad'];
-          
-          ////BUSCAMOS EL VALOR DEL INGREDIENTE DE ACUERDO AL RANGO DE EDAD
-          $instruccion_q ="SELECT (SUM(calculo_requerimientos.cantidad) / calculo_requerimientos.cupos) AS racion 
-                           FROM calculo_requerimientos 
-                           WHERE calculo_requerimientos.cod_programacion = $cod_programacion  AND calculo_requerimientos.cod_municipio = $cod_municipio
-                             AND calculo_requerimientos.cod_escuela = $cod_escuela 
-                             AND calculo_requerimientos.cod_rango_edad = $cod_rango AND calculo_requerimientos.cod_modalidad = $cod_modalidad 
-                             AND calculo_requerimientos.cod_ingrediente = $cod_ingrediente AND calculo_requerimientos.cod_tipo_minuta = $cod_tipo_minuta";
-                                   
-          $consulta_q = mysql_query($instruccion_q);
-          error_consulta($consulta_q,$instruccion_q);              
-          $row_q = mysql_fetch_array($consulta_q);   
-          
-          if($row_q[racion] == '')  $row_q[racion] = 0;
 
-          // $hojaExcel.="<td align='center'>$row_q[racion]</td>";
-           
-           }  
- 
-          ////BUSCAMOS LOS RANGOS DE EDAD
+
+        //CONSULTA INTERCAMBIOS EN LA PROGRAMACION
+        if ($nfilas_intercambio_programacion > 0){
+          $instruccion_intercambio = "SELECT sicc24.intercambios.cod_ingrediente_programado AS cod_ingrediente_programado,
+                                      sicc24.intercambios.cod_ingrediente_intercambio AS cod_ingrediente_intercambio, 
+                                      sicc24.ingrediente.nombre AS nombre_intercambio
+                                      FROM sicc24.intercambios
+                                      INNER JOIN sicc24.ingrediente ON sicc24.ingrediente.cod_ingrediente = sicc24.intercambios.cod_ingrediente_intercambio
+                                      WHERE cod_programacion = $cod_programacion AND cod_ingrediente_programado = $cod_ingrediente";
+                                      
+          $consulta_intercambio = mysql_query($instruccion_intercambio);
+          error_consulta($consulta_intercambio,$instruccion_intercambio);
+          $nfilas_intercambio = mysql_num_rows ($consulta_intercambio);
+          if ($nfilas_intercambio == 0){
+            $hojaExcel.="<td width='5%'></td>";
+          }else{
+            for ($inter=0;$inter<$nfilas_intercambio;$inter++){
+              $row_intercambio = mysql_fetch_array($consulta_intercambio);
+              $intercambio = $row_intercambio['nombre_intercambio'];
+              $hojaExcel.="<td width='5%'>$intercambio</td>";
+            }
+          }   
+        }
+        
+          ////BUSCAMOS LOS RANGOS DE EDAD DE ACUERDO A LA ESCUELA LA PROGRAMACION Y LA MODALIDAD
           $instruccion6 ="SELECT DISTINCT calculo_requerimientos.cod_rango_edad AS cod_rango_edad, rango_edad.nombre AS nombre
                           FROM calculo_requerimientos 
                           INNER JOIN rango_edad ON rango_edad.cod_rango_edad = calculo_requerimientos.cod_rango_edad  
                           WHERE calculo_requerimientos.cod_programacion = $cod_programacion AND calculo_requerimientos.cod_modalidad = $cod_modalidad
                             AND calculo_requerimientos.cod_municipio = $cod_municipio AND calculo_requerimientos.cod_escuela = $cod_escuela
                             AND calculo_requerimientos.cod_tipo_minuta = $cod_tipo_minuta";
-         
+                                  
           $consulta6 = mysql_query($instruccion6);
           error_consulta($consulta6,$instruccion6);
           $nfilas6 = mysql_num_rows ($consulta6);
-        
-          for ($m=0; $m<$nfilas6; $m++){
-            $row6 = mysql_fetch_array($consulta6);
           
+          for ($h=0; $h<$nfilas6; $h++){             
+            $row6 = mysql_fetch_array($consulta6);
+            
             $cod_rango = $row6['cod_rango_edad'];
             
             ////BUSCAMOS EL VALOR DEL INGREDIENTE DE ACUERDO AL RANGO DE EDAD
-            $instruccion_qt ="SELECT SUM(calculo_requerimientos.cantidad) AS cantidad 
-                             FROM calculo_requerimientos 
-                             WHERE calculo_requerimientos.cod_programacion = $cod_programacion AND calculo_requerimientos.cod_municipio = $cod_municipio 
-                               AND calculo_requerimientos.cod_escuela = $cod_escuela 
-                               AND calculo_requerimientos.cod_rango_edad = $cod_rango AND calculo_requerimientos.cod_modalidad = $cod_modalidad 
-                               AND calculo_requerimientos.cod_ingrediente = $cod_ingrediente AND calculo_requerimientos.cod_tipo_minuta = $cod_tipo_minuta";
-                                     
-            $consulta_qt = mysql_query($instruccion_qt);
-            error_consulta($consulta_qt,$instruccion_qt);              
-            $row_qt = mysql_fetch_array($consulta_qt);    
+            $instruccion_q ="SELECT (SUM(calculo_requerimientos.cantidad) / calculo_requerimientos.cupos) AS racion 
+                            FROM calculo_requerimientos 
+                            WHERE calculo_requerimientos.cod_programacion = $cod_programacion  AND calculo_requerimientos.cod_municipio = $cod_municipio
+                              AND calculo_requerimientos.cod_escuela = $cod_escuela 
+                              AND calculo_requerimientos.cod_rango_edad = $cod_rango AND calculo_requerimientos.cod_modalidad = $cod_modalidad 
+                              AND calculo_requerimientos.cod_ingrediente = $cod_ingrediente AND calculo_requerimientos.cod_tipo_minuta = $cod_tipo_minuta";
+                                    
+            $consulta_q = mysql_query($instruccion_q);
+            error_consulta($consulta_q,$instruccion_q);              
+            $row_q = mysql_fetch_array($consulta_q);   
             
-            if($row_qt[cantidad] == '')  $row_qt[cantidad] = 0;
+            if($row_q[racion] == '')  $row_q[racion] = 0;
 
-            // $hojaExcel.="<td align='center'>$row_qt[cantidad]</td>";
-           }  
-        $hojaExcel.="<td colspan='$nfilas_re' align='center'>$cantidad</td>";   
- 
-        ////BUSCAMOS LOS INGREDIENTES
-        $instruccion8 ="SELECT calculo_redondeado_escuela.cod_unidad_medida AS cod_unidad_medida, unidad_medida.nombre AS nom_unidad, 
-                               calculo_redondeado_escuela.cantidad_gr_cc AS cantidad_gr_cc, calculo_redondeado_escuela.cantida_bruta AS cantida_bruta, 
-                               calculo_redondeado_escuela.cantidad_redondeada AS cantidad_redondeada
-                        FROM calculo_redondeado_escuela
-                        LEFT JOIN unidad_medida ON unidad_medida.cod_unidad_medida = calculo_redondeado_escuela.cod_unidad_medida
-                        WHERE calculo_redondeado_escuela.cod_programacion = $cod_programacion AND calculo_redondeado_escuela.cod_municipio = $cod_municipio
-                          AND calculo_redondeado_escuela.cod_escuela = $cod_escuela AND calculo_redondeado_escuela.cod_ingrediente = $cod_ingrediente 
-                          AND calculo_redondeado_escuela.cod_tipo_minuta = $cod_tipo_minuta";
-   
-        $consulta8 = mysql_query($instruccion8);
-        error_consulta($consulta8,$instruccion8);
-        $nfilas8 = mysql_num_rows ($consulta8);
-        
-        for ($j=0; $j<$nfilas8; $j++){
-          $row8 = mysql_fetch_array($consulta8);
+            // $hojaExcel.="<td align='center'>$row_q[racion]</td>";
+            
+            }  
+  
+            ////BUSCAMOS LOS RANGOS DE EDAD
+            $instruccion6 ="SELECT DISTINCT calculo_requerimientos.cod_rango_edad AS cod_rango_edad, rango_edad.nombre AS nombre
+                            FROM calculo_requerimientos 
+                            INNER JOIN rango_edad ON rango_edad.cod_rango_edad = calculo_requerimientos.cod_rango_edad  
+                            WHERE calculo_requerimientos.cod_programacion = $cod_programacion AND calculo_requerimientos.cod_modalidad = $cod_modalidad
+                              AND calculo_requerimientos.cod_municipio = $cod_municipio AND calculo_requerimientos.cod_escuela = $cod_escuela
+                              AND calculo_requerimientos.cod_tipo_minuta = $cod_tipo_minuta";
           
-          $cod_unidad = $row8['cod_unidad_medida'];          
-          $cantidad_bruta = round($row8['cantida_bruta'],1);
-          $cantidad_redondeada = $row8['cantidad_redondeada'];
+            $consulta6 = mysql_query($instruccion6);
+            error_consulta($consulta6,$instruccion6);
+            $nfilas6 = mysql_num_rows ($consulta6);
           
-          if($cod_unidad == 0){
-            $nom_unidad = "GR/CC";
-            }else{
-              $nom_unidad = $row8['nom_unidad'];
-              }
+            for ($m=0; $m<$nfilas6; $m++){
+              $row6 = mysql_fetch_array($consulta6);
+            
+              $cod_rango = $row6['cod_rango_edad'];
+              
+              ////BUSCAMOS EL VALOR DEL INGREDIENTE DE ACUERDO AL RANGO DE EDAD
+              $instruccion_qt ="SELECT SUM(calculo_requerimientos.cantidad) AS cantidad 
+                              FROM calculo_requerimientos 
+                              WHERE calculo_requerimientos.cod_programacion = $cod_programacion AND calculo_requerimientos.cod_municipio = $cod_municipio 
+                                AND calculo_requerimientos.cod_escuela = $cod_escuela 
+                                AND calculo_requerimientos.cod_rango_edad = $cod_rango AND calculo_requerimientos.cod_modalidad = $cod_modalidad 
+                                AND calculo_requerimientos.cod_ingrediente = $cod_ingrediente AND calculo_requerimientos.cod_tipo_minuta = $cod_tipo_minuta";
+                                      
+              $consulta_qt = mysql_query($instruccion_qt);
+              error_consulta($consulta_qt,$instruccion_qt);              
+              $row_qt = mysql_fetch_array($consulta_qt);    
+              
+              if($row_qt[cantidad] == '')  $row_qt[cantidad] = 0;
+
+              // $hojaExcel.="<td align='center'>$row_qt[cantidad]</td>";
+            }  
+          $hojaExcel.="<td colspan='$nfilas_re' align='center'>$cantidad</td>";   
+  
+          ////BUSCAMOS LOS INGREDIENTES
+          $instruccion8 ="SELECT calculo_redondeado_escuela.cod_unidad_medida AS cod_unidad_medida, unidad_medida.nombre AS nom_unidad, 
+                                calculo_redondeado_escuela.cantidad_gr_cc AS cantidad_gr_cc, calculo_redondeado_escuela.cantida_bruta AS cantida_bruta, 
+                                calculo_redondeado_escuela.cantidad_redondeada AS cantidad_redondeada
+                          FROM calculo_redondeado_escuela
+                          LEFT JOIN unidad_medida ON unidad_medida.cod_unidad_medida = calculo_redondeado_escuela.cod_unidad_medida
+                          WHERE calculo_redondeado_escuela.cod_programacion = $cod_programacion AND calculo_redondeado_escuela.cod_municipio = $cod_municipio
+                            AND calculo_redondeado_escuela.cod_escuela = $cod_escuela AND calculo_redondeado_escuela.cod_ingrediente = $cod_ingrediente 
+                            AND calculo_redondeado_escuela.cod_tipo_minuta = $cod_tipo_minuta";
+    
+          $consulta8 = mysql_query($instruccion8);
+          error_consulta($consulta8,$instruccion8);
+          $nfilas8 = mysql_num_rows ($consulta8);
           
-          $hojaExcel.="<td align='center'>$nom_unidad</td>";
-          // $hojaExcel.="<td align='center'>$cantidad_bruta</td>";
-          $hojaExcel.="<td align='center'>$cantidad_redondeada</td>";
-        
-         }                     
-       $hojaExcel.="</tr>";  
-      }    
+          for ($j=0; $j<$nfilas8; $j++){
+            $row8 = mysql_fetch_array($consulta8);
+            
+            $cod_unidad = $row8['cod_unidad_medida'];          
+            $cantidad_bruta = round($row8['cantida_bruta'],1);
+            $cantidad_redondeada = $row8['cantidad_redondeada'];
+            
+            if($cod_unidad == 0){
+              $nom_unidad = "GR/CC";
+              }else{
+                $nom_unidad = $row8['nom_unidad'];
+                }
+            
+            $hojaExcel.="<td align='center'>$nom_unidad</td>";
+            // $hojaExcel.="<td align='center'>$cantidad_bruta</td>";
+            $hojaExcel.="<td align='center'>$cantidad_redondeada</td>";
+          
+          }                     
+        $hojaExcel.="</tr>";  
+        }    
 $hojaExcel.="</table>";
 
  //// LLAMAMOS LAS FUNCIONES QUE TRAEN LAS OBSERVACIONES     
