@@ -404,7 +404,20 @@ if ($cod_tipo_minuta == 0 || $cod_tipo_minuta == 0 || $cod_tipo_minuta == 0){
     $cod_tipo_minuta == 92 || $cod_tipo_minuta == 93 || $cod_tipo_minuta == 94 || $cod_tipo_minuta == 95 || $cod_tipo_minuta == 96 || $cod_tipo_minuta == 97){
     $logo_4 = "<img src='../imagenes/ibague_17.jpg' width='60' height='60' />";
   }         
-   
+
+  // SE HACE MODIFICACION YA QUE LOS CUPOS QUE TRAE EL ACTA LOS TRAIA DE LA TABLA CUPOS, OSEA QUE EN CASO Q CAMBIARA CUPOS Y SE GENERABA EL ACTA LOS TRAIA CON LOS NUEVOS CUPOS
+  $instruccion_nueva = "SELECT cupos AS cupos FROM item_programacion WHERE cod_programacion = $cod_programacion AND cod_escuela = $cod_escuela";
+  $consulta_nueva = mysql_query($instruccion_nueva);
+  error_consulta($consulta_nueva,$instruccion_nueva);
+  $numeroFilas = mysql_num_rows($consulta_nueva);
+  $total_cupos = 0;
+  for($i=0; $i < $numeroFilas; $i++){
+    $fila = mysql_fetch_array($consulta_nueva);
+    $cupos1 = $fila['cupos'];
+    $total_cupos = $fila['cupos'] + $total_cupos;
+  }
+
+
 $hojaExcel.="<H1 class=SaltoDePagina>";
 
  ////ENCABEZADO DE LA TABLA DE RESULTADOS
@@ -421,13 +434,7 @@ $hojaExcel.="<table width='100%'>";
     $hojaExcel.="<td width='15%'>$nom_departamento</td>";
     $hojaExcel.="<td width='10%'><strong>Municipio</strong></td>";
     $hojaExcel.="<td width='25%'>$nom_municipio</td>";
-    $hojaExcel.="<td width='15%'><strong># Cupos Programados</strong></td>";
-    $hojaExcel.="<td width='4%'>$total_cupos</td>";
-    $hojaExcel.="<td width='5%'><strong>AM</strong></td>";
-    $hojaExcel.="<td width='4%'>$total_cupos_am</td>";
-    $hojaExcel.="<td width='5%'><strong>PM</strong></td>";
-    $hojaExcel.="<td width='4%'>$total_cupos_pm</td>";
-    $hojaExcel.="<td width='5%'><strong>Total</strong></td>";
+    $hojaExcel.="<td width='15%'><strong>Total Cupos Programados</strong></td>";
     $hojaExcel.="<td width='4%'>$total_cupos</td>";
   $hojaExcel.="</tr>";
 $hojaExcel.="</table>";
@@ -435,75 +442,58 @@ $hojaExcel.="<table width='100%'>";
   $hojaExcel.="<tr>";
     $hojaExcel.="<td width='10%'><strong>Operador</strong></td>";
     $hojaExcel.="<td width='30%'>$nom_operador</td>";
-    $hojaExcel.="<td width='20%'><strong>$lugar</strong></td>";
+    $hojaExcel.="<td width='20%'><strong>Unidad de Servicio</strong></td>";
     $hojaExcel.="<td width='40%'>$nom_escuela</td>";
   $hojaExcel.="</tr>";
 $hojaExcel.="</table>";
+$queryMenus = "SELECT nombre_menu FROM programacion WHERE cod_programacion = $cod_programacion";
+
+$querysNombreMenu = mysql_query($queryMenus);
+$nfilasConsulta = mysql_num_rows ($querysNombreMenu);
+
+for ($i=0; $i<$nfilasConsulta; $i++){
+  $row6 = mysql_fetch_array($querysNombreMenu);
+  $nombre_Menus = $row6['nombre_menu']; 
+ }
 $hojaExcel.="<table width='100%'>";
   $hojaExcel.="<tr>";
-    $hojaExcel.="<th colspan='3'>Periodo de Compra y Entrega</th>";
-    $hojaExcel.="<th colspan='2'>Programa [$nom_tipo_minuta]</th>";
- $hojaExcel.=" </tr>";
-  $hojaExcel.="<tr>";
-    $hojaExcel.="<td width='20%'><strong>Semanal:</strong> $per_s </td>";
-    $hojaExcel.="<td width='20%'><strong>Quincenal:</strong> $per_q</td>";
-    $hojaExcel.="<td width='20%'><strong>Mensual:</strong> $per_m</td>";
-    $hojaExcel.="<td width='26%'><strong>Desayuno o Complemento J.T:</strong> $mod_d</td>";
-    $hojaExcel.="<td width='14%'><strong>Almuerzo:</strong> $mod_a</td>";
-  $hojaExcel.="</tr>";
-$hojaExcel.="</table> ";
-$hojaExcel.="<table width='100%'>";
-  $hojaExcel.="<tr>";
-    $hojaExcel.="<td width='33%'><strong>Ciclo de Menú:</strong> &nbsp; $nom_ciclo &nbsp;&nbsp;&nbsp; $cad_menu</td>";
+    $hojaExcel.="<td width='33%'><strong>Ciclo de Menú:</strong> &nbsp; $nombre_Menus &nbsp;&nbsp;&nbsp;</td>";
     $hojaExcel.="<td width='33%'>$cad_fecha</td>";
-    $hojaExcel.="<td width='33%'><strong>Fecha de entrega:</strong> </td>";
+    $hojaExcel.="<td width='33%'><strong><center>Programa:   $nom_tipo_minuta</center></strong> </td>";
   $hojaExcel.="</tr>";
 $hojaExcel.="</table>";
 $hojaExcel.="<table width='100%'>";
+
+/// CONSULTA DE LOS MENUS PROGRAMADOS
+$instruccion6 = "SELECT DISTINCT sicc24.calculo_requerimientos.cod_menu as cod_menu,
+                        sicc24.menu.nombre as nombre_menu
+                        from sicc24.calculo_requerimientos
+                        inner join sicc24.menu on sicc24.calculo_requerimientos.cod_menu  = sicc24.menu.cod_menu
+                        where cod_programacion = $cod_programacion";
+
+  $consulta6 = mysql_query($instruccion6);
+  error_consulta($consulta6,$instruccion6);
+  $nfilas6 = mysql_num_rows ($consulta6);
+
   $hojaExcel.="<tr>";
     $hojaExcel.="<td colspan='3'>&nbsp;</td>";
-    $hojaExcel.="<th colspan='3'>LUNES</th>";
-    $hojaExcel.="<th colspan='3'>MARTES</th>";
-    $hojaExcel.="<th colspan='3'>MIERCOLES</th>";
-    $hojaExcel.="<th colspan='3'>JUEVES</th>";
-    $hojaExcel.="<th colspan='3'>VIERNES</th>";
-   if($nfilas0 == 6){
-    $hojaExcel.="<th colspan='3'>SABADO</th>"; 
-     } 
-     
-   if($nfilas0 == 7){
-    $hojaExcel.="<th colspan='3'>SABADO</th>";
-    $hojaExcel.="<th colspan='3'>DOMINGO</th>"; 
-     }      
-    $hojaExcel.="<td>&nbsp;</td>";
-  $hojaExcel.="</tr>";
-  $hojaExcel.="<tr>";
-    $hojaExcel.="<th width='13%'>PRODUCTO</th>";
-    $hojaExcel.="<th width='8%'>UNIDAD DE COMPRA</th>";
-    $hojaExcel.="<th>CANTIDAD ENTREGADA EN LA UNIDAD</th>";
-    $hojaExcel.="<th colspan='2'>CANTIDAD DE GASTO DIARIO</th>";
-    $hojaExcel.="<th>SALIDA REAL DIARIA</th>";
-    $hojaExcel.="<th colspan='2'>CANTIDAD DE GASTO DIARIO</th>";
-    $hojaExcel.="<th>SALIDA REAL DIARIA</th>";           
-    $hojaExcel.="<th colspan='2'>CANTIDAD DE GASTO DIARIO</th>";
-    $hojaExcel.="<th>SALIDA REAL DIARIA</th>";
-    $hojaExcel.="<th colspan='2'>CANTIDAD DE GASTO DIARIO</th>";
-    $hojaExcel.="<th>SALIDA REAL DIARIA</th>";
-    $hojaExcel.="<th colspan='2'>CANTIDAD DE GASTO DIARIO</th>";
-    $hojaExcel.="<th>SALIDA REAL DIARIA</th>";
-  if($nfilas0 == 6){
-    $hojaExcel.="<th colspan='2'>CANTIDAD DE GASTO DIARIO</th>";
-    $hojaExcel.="<th>SALIDA REAL DIARIA</th>";
-    } 
-    
-  if($nfilas0 == 7){
-    $hojaExcel.="<th colspan='2'>CANTIDAD DE GASTO DIARIO</th>";
-    $hojaExcel.="<th>SALIDA REAL DIARIA</th>";  
-    $hojaExcel.="<th colspan='2'>CANTIDAD DE GASTO DIARIO</th>";
-    $hojaExcel.="<th>SALIDA REAL DIARIA</th>";
-    }         
-    $hojaExcel.="<th width='4%'>SALDO</td>";
-  $hojaExcel.="</tr>";
+    for ($h=0; $h<$nfilas6; $h++){             
+      $row6 = mysql_fetch_array($consulta6);
+      
+      $nombre_menu = $row6['nombre_menu'];
+      $hojaExcel.="<th colspan='3'>$nombre_menu</th>";
+    }
+
+    $hojaExcel.="<tr>";  
+      $hojaExcel.="<th width='13%'>PRODUCTO</th>";
+      $hojaExcel.="<th width='8%'>UNIDAD DE COMPRA</th>";
+      $hojaExcel.="<th>CANTIDAD ENTREGADA EN LA UNIDAD</th>";
+      for ($h=0; $h<$nfilas6; $h++){             
+        $hojaExcel.="<th colspan='2'>CANTIDAD DE GASTO DIARIO</th>";
+        $hojaExcel.="<th>SALIDA REAL DIARIO</th>";
+      }
+      $hojaExcel.="<th width='4%'>SALDO</td>";
+    $hojaExcel.="</tr>";
   $hojaExcel.="<tr>";
 
       ////BUSCAMOS LOS INGREDIENTES
@@ -577,18 +567,20 @@ $hojaExcel.="<table width='100%'>";
         $hojaExcel.="<td align='center'>$cantidad</td>";
         
         ////BUSCAMOS LOS MENUS
-        $instruccion6 ="SELECT DISTINCT menu.cod_menu AS cod_menu, menu.nombre AS nom_menu 
-                        FROM menu 
-                        INNER JOIN plato_ingrediente ON plato_ingrediente.cod_menu = menu.cod_menu
-                        WHERE plato_ingrediente.cod_minuta = $cod_minuta 
-                        ORDER BY menu.cod_menu";
-                                 
+        // $instruccion6 ="SELECT DISTINCT menu.cod_menu AS cod_menu, menu.nombre AS nom_menu 
+        //                 FROM menu 
+        //                 INNER JOIN plato_ingrediente ON plato_ingrediente.cod_menu = menu.cod_menu
+        //                 WHERE plato_ingrediente.cod_minuta = $cod_minuta 
+        //                 ORDER BY menu.cod_menu";
+        
+        
+
         $consulta6 = mysql_query($instruccion6);
         error_consulta($consulta6,$instruccion6);
         $nfilas6 = mysql_num_rows ($consulta6);
         
         ////SE USA CUANDO HAY MINUTAS QUE TIENE MENOS DE 5 MENUS EN LA SEMANA
-        if($nfilas6 < 5) $nfilas6 = 5;
+        // if($nfilas6 < 5) $nfilas6 = 5;
         
         for ($h=0; $h<$nfilas6; $h++){             
           $row6 = mysql_fetch_array($consulta6);
@@ -660,7 +652,7 @@ $hojaExcel.="<table width='100%'>";
           
            } 
            $hojaExcel.="<td align='center'>&nbsp;</td>";
-          $hojaExcel.="</tr>";         
+          $hojaExcel.="</tr>";
          }                     
 $hojaExcel.="</table>";
 
@@ -752,6 +744,9 @@ if($no_formtato_inv_ind == '1'){
 $hojaExcel.="<H1 class=SaltoDePagina>";
 
  ////ENCABEZADO DE LA TABLA DE RESULTADOS
+
+
+ 
 $hojaExcel.="<table width='98%'>";
   $hojaExcel.="<tr>";
     $hojaExcel.="<td width='50%' height='74'>$logo&nbsp;&nbsp;$logo_4&nbsp;&nbsp$logo_1</td>";
