@@ -423,7 +423,7 @@ if($tipo_operacion == 5){
 if($tipo_operacion == 5){ 
 ?>
   <TABLE width='100%' align='center'>
-  <TR><TD  style='font-weight:bold; color: white' ><center><strong>Va a eliminar la Observacion #: <?php echo  $num_observacion; ?> </strong></center></TD></TR>      
+  <TR><TD  style='font-weight:bold; color: white' ><center><strong>Va a eliminar el intercambio</strong></center></TD></TR>      
   </TR>
 <?php 
  }

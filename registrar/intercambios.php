@@ -155,49 +155,39 @@ error_consulta($result,$registro);
       print ("</FORM>");
       print ("</TD></TR><tr><td>&nbsp;</td></tr></table>");
      
-      ////GENERAMOS LA CONDICION DE LA CONSULTA
-      $condicion = " WHERE ";
+      // ////GENERAMOS LA CONDICION DE LA CONSULTA
+      // $condicion = " WHERE ";
       
-      if($cod_programacion != ''){
-         $condicion2 = $condicion2. "observacion.cod_programacion = $cod_programacion AND ";
-        }
+      // if($cod_programacion != ''){
+      //    $condicion2 = $condicion2. "observacion.cod_programacion = $cod_programacion AND ";
+      //   }
        
-        $condicion2 = substr($condicion2, 0, -4);
-        $condicion_final = $condicion.$condicion2;    
+      //   $condicion2 = substr($condicion2, 0, -4);
+      //   $condicion_final = $condicion.$condicion2;    
         
-        if($condicion_final == " WHERE "){
-           $condicion_final = " WHERE observacion.cod_observacion = 0";
-           $limit = "LIMIT ".$pagina.",".$num_reg_pag; 
-          }else{
-            $limit = "";
-            } 
+      //   if($condicion_final == " WHERE "){
+      //      $condicion_final = " WHERE observacion.cod_observacion = 0";
+      //      $limit = "LIMIT ".$pagina.",".$num_reg_pag; 
+      //     }else{
+      //       $limit = "";
+      //       } 
            
       ////EJECUTAMOS LA CONSULTA
-      $instruccion2 ="SELECT distinct ingrediente_programacion.cod_ingrediente AS codigo_ingrediente,
-                    ingrediente.nombre as nombre_ingrediente
-                    from ingrediente_programacion
-                    inner join ingrediente on ingrediente.cod_ingrediente = ingrediente_programacion.cod_ingrediente
-                    where cod_programacion = $cod_programacion ORDER BY nombre";
-     
-      $consulta2 = mysql_query($instruccion2);
-      error_consulta($consulta2,$instruccion2);
-      $nfilasingredientes = mysql_num_rows($consulta2);
-      
-      if($cod_programacion != '' && $opcion_vista == 1){
-        $hojaExcel2.="<TABLE width='90%'>";
-        $hojaExcel2.="<TR><TH colspan='9'><center>REGISTRAR INTERCAMBIO</center></TH></TR>";
-        $hojaExcel2.="<TR><TH><center>Intercambios</center></TH>";
 
-        $hojaExcel2.="<TH><center>Escuela</center></TH></TR>";
-        $hojaExcel2.="<TR><TH><center> <a href=javascript:operar_tabla($cod_programacion,0,1) title='Registrar Observación Programaci�n'><img src='../imagenes/observacion.png' width='24' height='24' border='0' alt=''></a> </center></TH>";
-        $hojaExcel2.="<TH><center> <a href=javascript:operar_tabla($cod_programacion,0,7) title='Registrar Observación Intercambio'><img src='../imagenes/observacion.png' width='24' height='24' border='0' alt=''></a> </center></TH>";
-        $hojaExcel2.="<TH><center> <a href=javascript:operar_tabla($cod_programacion,0,2) title='Registrar Observación Municipio'><img src='../imagenes/observacion.png' width='24' height='24' border='0' alt=''></a> </center></TH>";
-        $hojaExcel2.="<TH><center> <a href=javascript:operar_tabla($cod_programacion,0,3) title='Registrar Observación Escuela'><img src='../imagenes/observacion.png' width='24' height='24' border='0' alt=''></a> </center></TH></TR>";
-        $hojaExcel2.="</TABLE>";
-        $hojaExcel2.="<br>";
-        
-        echo $hojaExcel2;
-        }
+      if(isset($_POST['consultar'])){
+
+        $instruccion2 ="SELECT distinct calculo_redondeado_escuela.cod_ingrediente AS codigo_ingrediente,
+                        ingrediente.nombre as nombre_ingrediente
+                        from calculo_redondeado_escuela
+                        inner join ingrediente on ingrediente.cod_ingrediente = calculo_redondeado_escuela.cod_ingrediente
+                        where cod_programacion = $cod_programacion order by nombre_ingrediente";
+       
+        $consulta2 = mysql_query($instruccion2);
+        error_consulta($consulta2,$instruccion2);
+        $nfilasingredientes = mysql_num_rows($consulta2);
+      }
+      
+
       
       ////MOSTRAMOS LOS RESULTADOS DE LA CONSULTA
       
@@ -205,13 +195,13 @@ error_consulta($result,$registro);
       
       ////ENCABEZADO DE LA TABLA DE RESULTADOS
       $hojaExcel.="<TABLE width='80%'>";
-      $hojaExcel.="<TR><TH colspan='13'><center>OBSERVACIONES &nbsp;&nbsp;&nbsp;<a href=javascript:operar_tabla($cod_programacion,0,6) title='Duplicar Observaciones en Otra Programaci�n'><img src='../imagenes/duplicar_obs.png' width='24' height='24' border='0' alt=''></a></center></TH></TR>";       
+      $hojaExcel.="<TR><TH colspan='13'><center>REGISTRAR INTERCAMBIOS EN PROGRAMACION ". $cod_programacion ."</center></TH></TR>";       
       $hojaExcel.="<TH><center>Producto Minuta</center></TH>";
       $hojaExcel.="<TH><center>Producto Intercambio</center></TH>";
       $hojaExcel.="<TH width='10%'><center>Agregar Intercambio</center></TH>";
 
     if($opcion_vista == 1){
-      $hojaExcel.="<TH><center>Editar</center></TH>";
+      
       $hojaExcel.="<TH><center>Eliminar</center></TH>";
      }
       $hojaExcel.="</TR>";
@@ -234,9 +224,29 @@ error_consulta($result,$registro);
             
             $hojaExcel.="<TR>"; 
             $hojaExcel.="<TD style=background:$color>" . $row2['nombre_ingrediente'] . "</TD>";
-            $hojaExcel.="<TD style=background:$color>"  . "</TD>";
-            $hojaExcel.="<TD style=background:$color> <center><a href=javascript:operar_tabla($cod_programacion,$row2[codigo_ingrediente],1) title='Registrar Intercambio Producto'><img src='../imagenes/observacion.png' width='15' height='15' border='0' alt=''></a></center>" . "</TD>";
-          
+            /// CONSULTA DE INTERMCABIO SOBRE CADA PRODUCTO
+            $query_intercambios = "SELECT sicc24.ingrediente.nombre as nombre_ingrediente
+                                    FROM sicc24.intercambios 
+                                    INNER JOIN sicc24.ingrediente on sicc24.ingrediente.cod_ingrediente = sicc24.intercambios.cod_ingrediente_intercambio
+                                    where cod_programacion = $cod_programacion and cod_ingrediente_programado = $row2[codigo_ingrediente]";
+            // echo $query_intercambios;
+            $consulta_intecambios_ing = mysql_query($query_intercambios);
+            $nfilas_intercambio = mysql_num_rows ($consulta_intecambios_ing);
+            $intercambio = null;
+            
+            for ($inter=0;$inter<$nfilas_intercambio;$inter++){
+              $row_intercambio = mysql_fetch_array($consulta_intecambios_ing);
+              $intercambio = $row_intercambio['nombre_ingrediente'];
+            }
+            $hojaExcel.="<TD style=background:$color>". $intercambio ."</TD>";
+            if ($nfilas_intercambio == 0){
+              $hojaExcel.="<TD style=background:$color> <center><a href=javascript:operar_tabla($cod_programacion,$row2[codigo_ingrediente],1) title='Registrar Intercambio Producto'><img src='../imagenes/observacion.png' width='15' height='15' border='0' alt=''></a></center>" . "</TD>";
+              $hojaExcel.="<TD style=background:$color> <center>" . "</TD>";
+            }else{
+              $hojaExcel.="<TD style=background:$color> <center>" . "</TD>";
+              $hojaExcel.="<TD style=background:$color> <center><a href=javascript:operar_tabla($cod_programacion,$row2[codigo_ingrediente],5) title='Eliminar Intercambio Producto'><img src='../imagenes/borrar.png' width='15' height='15' border='0' alt=''></a></center>" . "</TD>";
+            }
+            
          }
          $hojaExcel.="</TABLE>";
          echo $hojaExcel;

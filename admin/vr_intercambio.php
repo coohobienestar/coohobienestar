@@ -300,7 +300,7 @@ $departamento = $_REQUEST[departamento];
     }
 
   if($tipo_operacion == 5){
-     $instruccion4 = "DELETE FROM observacion WHERE cod_observacion=$num_observacion"; 
+     $instruccion4 = "DELETE FROM intercambios WHERE cod_programacion = $cod_programacion and cod_ingrediente_programado=$cod_ingrediente"; 
      $consulta4 = mysql_query ($instruccion4, $conexion);                                  
     }     
     
