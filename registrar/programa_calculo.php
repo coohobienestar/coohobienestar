@@ -98,7 +98,7 @@ $ape_usuario = $row['ape_usuario'];
       print ("<TD style='font-weight:bold; color: white' colspan='5'>Seleccione el Ciclo a Calcular &nbsp;&nbsp;<img src='../imagenes/requerido.gif'>&nbsp;&nbsp;");
       print ("<SELECT NAME='ciclo'>");                
 
-      $instruccion = "SELECT cod_ciclo, nombre FROM ciclo WHERE nombre not like '%alcal%' AND cod_ciclo <> 999 ORDER BY cod_ciclo";
+      $instruccion = "SELECT cod_ciclo, nombre FROM ciclo WHERE nombre not like '%alcal%' AND cod_ciclo <> 999 ORDER BY nombre";
       $consulta = mysql_query ($instruccion, $conexion);
       error_consulta($consulta,$instruccion);
       $row = mysql_fetch_array ($consulta); 

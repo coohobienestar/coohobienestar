@@ -41,7 +41,7 @@ error_consulta($result,$registro);
       }
   if(($cod_usuario != '') && ($autorizado==1)){
     }else{
-      die("<br>No ha iniciado una sesión O no puede acceder a esta pagina por su perfil.");
+      die("<br>No ha iniciado una sesiï¿½n O no puede acceder a esta pagina por su perfil.");
       } 
 
 ?>
@@ -88,7 +88,7 @@ error_consulta($result,$registro);
 <table width='95%'>
 <tr>
 <td width='30%' style='font-weight:bold; color: white' align="left">Bienvenido&nbsp;&nbsp;&nbsp;<img src="../imagenes/usuario.png">&nbsp;&nbsp;&nbsp;<?php print("$nom_usuario $ape_usuario");?></td>
-<td width='30%' style='font-weight:bold; color: white' align="right"><a href="../menu_retorna.php" align="right"><img src="../imagenes/retornar.png">&nbsp;Retornar</a> | <a href="../logout.php"><img src="../imagenes/exit.png">&nbsp;Cerrar sesión</a></td>
+<td width='30%' style='font-weight:bold; color: white' align="right"><a href="../menu_retorna.php" align="right"><img src="../imagenes/retornar.png">&nbsp;Retornar</a> | <a href="../logout.php"><img src="../imagenes/exit.png">&nbsp;Cerrar sesiï¿½n</a></td>
 </tr>
 </table>
 <br>
@@ -110,7 +110,7 @@ session_start();
         }
     if(($cod_usuario != '') && ($autorizado==1)){
       }else{
-        die("<br>No ha iniciado una sesión 1 O no puede acceder a esta pagina por su perfil.");
+        die("<br>No ha iniciado una sesiï¿½n 1 O no puede acceder a esta pagina por su perfil.");
         } 
 
       ////RECIBIMOS LOS PARAMETROS Q VIENEN EN LA URL
@@ -146,7 +146,7 @@ session_start();
       print ("<TR style='font-weight:bold; color: white'>");
       
       ////BUSCAMOS LAS PROGRAMACIONES
-      print ("<TD>Programación ");
+      print ("<TD>Programaciï¿½n ");
       print ("&nbsp;&nbsp;<img src='../imagenes/requerido.gif'><SELECT NAME='programacion'>");                
 
       $instruccion = "SELECT DISTINCT programacion.cod_programacion AS cod_programacion, ciclo.nombre AS nombre
@@ -161,7 +161,7 @@ session_start();
       $descp = "--";
           print("<option value=".$valdesc.">".$descp."</option>");  
         do{ 
-           print("<option value=".$row['cod_programacion'].">[".$row['cod_programacion']."] - [".$row['nombre']."]</option>");
+           print("<option value=".$row['cod_programacion'].">".$row['cod_programacion']." - ".$row['nombre']."</option>");
         }while ($row = mysql_fetch_array($consulta)); 
         print("</SELECT></TD>");      
         
@@ -245,7 +245,7 @@ session_start();
       if ($nfilas > 0){
         ////ENCABEZADO DE LA TABLA DE RESULTADOS
         $hojaExcel="<TABLE width='80%'>";
-        $hojaExcel.="<TR><TH colspan='8'><center>LISTAS DE ENTREGA -- [Programación: $cod_programacion] </center></TH></TR>";       
+        $hojaExcel.="<TR><TH colspan='8'><center>LISTAS DE ENTREGA -- [Programaciï¿½n: $cod_programacion] </center></TH></TR>";       
         $hojaExcel.="<TH><center>Departamento</center></TH>";
         $hojaExcel.="<TH colspan='3'><center>Municipio</center></TH>";
         $hojaExcel.="<TH><center>Escuela</center></TH>";
@@ -321,7 +321,7 @@ session_start();
        print ("<center><span class='Estilo1'>No hay informacion disponible <br>Debe seleccionar una programacion pra ejecutar el informe</span></center>");
 
 
-////Cerrar conexión
+////Cerrar conexiï¿½n
 mysql_close ($conexion);
 ?>
 </div>
