@@ -627,8 +627,8 @@ $hojaExcel.="</table>";
 // SECCION REPOSICIONES
 $hojaExcel.="<table width='98%'>";
   $hojaExcel.="<tr>";
-    $hojaExcel.="<th width='13%' rowspan='3'><h4>REPOSICIONES - INTERCAMBIOS</h4></th>";
-    $hojaExcel.="<td width='87%' height='30px'>$cad_intercambios</td>";
+    $hojaExcel.="<th width='13%' rowspan='3'><h4>REPOSICIONES</h4></th>";
+    // $hojaExcel.="<td width='87%' height='30px'>$cad_intercambios</td>";
   $hojaExcel.="</tr>";
   $hojaExcel.="<tr>";
     $hojaExcel.="<td height='30px'></td>";

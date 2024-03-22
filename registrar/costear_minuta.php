@@ -49,14 +49,14 @@ error_consulta($result,$registro);
 <HTML LANG="es">
 
 <HEAD>
-<TITLE>OBSERVACION</TITLE>
+<TITLE>INTERCAMBIOS</TITLE>
 <link rel="stylesheet" type="text/css" href="../estilos/estilo.css">
 <SCRIPT SRC="../calendar/calendar.js"></SCRIPT>
 <SCRIPT LANGUAGE='JavaScript'>
 <!--
    ////FUNCION PARA HACER OPERACIONES SOBRE LAS TABLAS [REGISTRAR (1) - EDITAR (2)]
-    function operar_tabla(codigo,observacion,tipo_operacion){ 
-    var url="../admin/operacion_observacion.php?codigo="+codigo+"&observacion="+observacion+"&tipo_operacion="+tipo_operacion;
+    function operar_tabla(codigo,cod_ingrediente,tipo_operacion){ 
+    var url="../admin/operacion_intercambios.php?codigo="+codigo+"&cod_ingrediente="+cod_ingrediente+"&tipo_operacion="+tipo_operacion;
     open(url,"Sizewindow","width=800,height=400,top=50,left=50,scrollbars=yes,toolbar=no,directories=no,location=no") 
     }
    
@@ -68,7 +68,7 @@ error_consulta($result,$registro);
       k = document.forms.datechooser.pagina.selectedIndex;
       pagina = document.forms.datechooser.pagina.options[k].value;
             
-      window.location = 'admin_observacion.php?programacion='+programacion+'&pagina='+pagina;
+      window.location = 'intercambios.php?programacion='+programacion+'&pagina='+pagina;
    }
 // -->
 </SCRIPT>
@@ -111,7 +111,7 @@ error_consulta($result,$registro);
           
       ////MOSTRAMOS EL FORMULARIO DONDE SE UBICAN LOS FILTROS
       print ("<TABLE width='80%' align='center'>");
-      print ("<FORM NAME='datechooser' ACTION='admin_observacion.php' METHOD='POST'>");
+      print ("<FORM NAME='datechooser' ACTION='intercambios.php' METHOD='POST'>");
       print ("<TR style='font-weight:bold; color: white'>");
 
       ////BUSCAMOS LAS PROGRAMACIONES
@@ -130,7 +130,7 @@ error_consulta($result,$registro);
       $descp = "--";
           print("<option value=".$valdesc.">".$descp."</option>");  
         do{ 
-           print("<option value=".$row['cod_programacion'].">".$row['cod_programacion']." - [".$row['nombre']."]</option>");
+           print("<option value=".$row['cod_programacion'].">[".$row['cod_programacion']."] - [".$row['nombre']."]</option>");
         }while ($row = mysql_fetch_array($consulta)); 
         print("</SELECT></TD>"); 
                
@@ -155,82 +155,60 @@ error_consulta($result,$registro);
       print ("</FORM>");
       print ("</TD></TR><tr><td>&nbsp;</td></tr></table>");
      
-      ////GENERAMOS LA CONDICION DE LA CONSULTA
-      $condicion = " WHERE ";
+      // ////GENERAMOS LA CONDICION DE LA CONSULTA
+      // $condicion = " WHERE ";
       
-      if($cod_programacion != ''){
-         $condicion2 = $condicion2. "observacion.cod_programacion = $cod_programacion AND ";
-        }
+      // if($cod_programacion != ''){
+      //    $condicion2 = $condicion2. "observacion.cod_programacion = $cod_programacion AND ";
+      //   }
        
-        $condicion2 = substr($condicion2, 0, -4);
-        $condicion_final = $condicion.$condicion2;    
+      //   $condicion2 = substr($condicion2, 0, -4);
+      //   $condicion_final = $condicion.$condicion2;    
         
-        if($condicion_final == " WHERE "){
-           $condicion_final = " WHERE observacion.cod_observacion = 0";
-           $limit = "LIMIT ".$pagina.",".$num_reg_pag; 
-          }else{
-            $limit = "";
-            } 
+      //   if($condicion_final == " WHERE "){
+      //      $condicion_final = " WHERE observacion.cod_observacion = 0";
+      //      $limit = "LIMIT ".$pagina.",".$num_reg_pag; 
+      //     }else{
+      //       $limit = "";
+      //       } 
            
       ////EJECUTAMOS LA CONSULTA
-      $instruccion2 ="SELECT observacion.cod_observacion AS cod_observacion, observacion.cod_municipio AS cod_municipio, municipio.nombre AS nom_municipio, 
-                             observacion.cod_escuela AS cod_escuela, escuela.nombre AS nom_escuela, observacion.cod_tipo_minuta AS cod_tipo_minuta, 
-                             tipo_minuta.nombre AS nom_tipo_minuta, observacion.observacion_lista_entrega AS observacion_lista_entrega, 
-                             observacion.observacion_control_es AS observacion_control_es, observacion.intercambio AS intercambio
-                      FROM observacion 
-                      LEFT JOIN municipio ON municipio.cod_municipio = observacion.cod_municipio
-                      LEFT JOIN escuela ON escuela.cod_escuela = observacion.cod_escuela
-                      LEFT JOIN tipo_minuta ON tipo_minuta.cod_tipo_minuta = observacion.cod_tipo_minuta
-                      $condicion_final 
-                      ORDER BY observacion.cod_observacion
-                      $limit  
-                      ";
-     
-      $consulta2 = mysql_query($instruccion2);
-      error_consulta($consulta2,$instruccion2);
-      
-      if($cod_programacion != '' && $opcion_vista == 1){
-        $hojaExcel2.="<TABLE width='90%'>";
-        $hojaExcel2.="<TR><TH colspan='9'><center>REGISTRAR OBSERVACION PARA</center></TH></TR>";
-        $hojaExcel2.="<TR><TH><center>Programación</center></TH>";
-        $hojaExcel2.="<TH><center>Intercambio</center></TH>";
-        $hojaExcel2.="<TH><center>Municipio</center></TH>";
 
-        $hojaExcel2.="<TH><center>Escuela</center></TH></TR>";
-        $hojaExcel2.="<TR><TH><center> <a href=javascript:operar_tabla($cod_programacion,0,1) title='Registrar Observación Programaci�n'><img src='../imagenes/observacion.png' width='24' height='24' border='0' alt=''></a> </center></TH>";
-        $hojaExcel2.="<TH><center> <a href=javascript:operar_tabla($cod_programacion,0,7) title='Registrar Observación Intercambio'><img src='../imagenes/observacion.png' width='24' height='24' border='0' alt=''></a> </center></TH>";
-        $hojaExcel2.="<TH><center> <a href=javascript:operar_tabla($cod_programacion,0,2) title='Registrar Observación Municipio'><img src='../imagenes/observacion.png' width='24' height='24' border='0' alt=''></a> </center></TH>";
-        $hojaExcel2.="<TH><center> <a href=javascript:operar_tabla($cod_programacion,0,3) title='Registrar Observación Escuela'><img src='../imagenes/observacion.png' width='24' height='24' border='0' alt=''></a> </center></TH></TR>";
-        $hojaExcel2.="</TABLE>";
-        $hojaExcel2.="<br>";
-        
-        echo $hojaExcel2;
-        }
+      if(isset($_POST['consultar'])){
+
+        $instruccion2 ="SELECT distinct calculo_redondeado_escuela.cod_ingrediente AS codigo_ingrediente,
+                        ingrediente.nombre as nombre_ingrediente
+                        from calculo_redondeado_escuela
+                        inner join ingrediente on ingrediente.cod_ingrediente = calculo_redondeado_escuela.cod_ingrediente
+                        where cod_programacion = $cod_programacion order by nombre_ingrediente";
+       
+        $consulta2 = mysql_query($instruccion2);
+        error_consulta($consulta2,$instruccion2);
+        $nfilasingredientes = mysql_num_rows($consulta2);
+      }
+      
+
       
       ////MOSTRAMOS LOS RESULTADOS DE LA CONSULTA
-      $nfilas = mysql_num_rows ($consulta2);
-      if ($nfilas > 0){
+      
+      if ($nfilasingredientes > 0){
       
       ////ENCABEZADO DE LA TABLA DE RESULTADOS
       $hojaExcel.="<TABLE width='80%'>";
-      $hojaExcel.="<TR><TH colspan='13'><center>OBSERVACIONES &nbsp;&nbsp;&nbsp;<a href=javascript:operar_tabla($cod_programacion,0,6) title='Duplicar Observaciones en Otra Programaci�n'><img src='../imagenes/duplicar_obs.png' width='24' height='24' border='0' alt=''></a></center></TH></TR>";       
-      $hojaExcel.="<TH><center>#</center></TH>";
-      $hojaExcel.="<TH><center>Programacion</center></TH>";
-      $hojaExcel.="<TH colspan='2'><center>Municipio</center></TH>";
-      $hojaExcel.="<TH colspan='2'><center>Escuela</center></TH>";
-      $hojaExcel.="<TH colspan='2'><center>Tipo Minuta</center></TH>";
-      $hojaExcel.="<TH colspan='1'><center>Intercambio</center></TH>";
-      $hojaExcel.="<TH><center>Observación Lista Entrega</center></TH>";
-      $hojaExcel.="<TH><center>Observación Control E/S</center></TH>";
+      $hojaExcel.="<TR><TH colspan='13'><center>REGISTRAR INTERCAMBIOS EN PROGRAMACION ". $cod_programacion ."</center></TH></TR>";       
+      $hojaExcel.="<TH><center>Producto Minuta</center></TH>";
+      $hojaExcel.="<TH><center>Producto Intercambio</center></TH>";
+      $hojaExcel.="<TH width='10%'><center>Agregar Intercambio</center></TH>";
+
     if($opcion_vista == 1){
-      $hojaExcel.="<TH><center>Editar</center></TH>";
+      
       $hojaExcel.="<TH><center>Eliminar</center></TH>";
      }
       $hojaExcel.="</TR>";
 
       $color = '';
-
-         for ($i=0; $i<$nfilas; $i++){
+      for ($i=0; $i<$nfilasingredientes; $i++){
+    
             ////DEFINIMOS EL COLOR DE LA FILA
             $resto = $i%2;
             
@@ -244,23 +222,31 @@ error_consulta($result,$registro);
             ////ESCRIBIMOS LOS RESULTADOS
             $row2 = mysql_fetch_array($consulta2);
             
-            $hojaExcel.="<TR>";
-            $hojaExcel.="<TD style=background:$color>" . $row2['cod_observacion'] . "</TD>";
-            $hojaExcel.="<TD style=background:$color>" . $cod_programacion . "</TD>";
-            $hojaExcel.="<TD style=background:$color>" . $row2['cod_municipio'] . "</TD>";
-            $hojaExcel.="<TD style=background:$color>" . $row2['nom_municipio'] . "</TD>";
-            $hojaExcel.="<TD style=background:$color>" . $row2['cod_escuela'] . "</TD>";
-            $hojaExcel.="<TD style=background:$color>" . $row2['nom_escuela'] . "</TD>";
-            $hojaExcel.="<TD style=background:$color>" . $row2['cod_tipo_minuta'] . "</TD>";
-            $hojaExcel.="<TD style=background:$color>" . $row2['nom_tipo_minuta'] . "</TD>";
-            $hojaExcel.="<TD style=background:$color>" . $row2['intercambio'] . "</TD>";
-            $hojaExcel.="<TD style=background:$color>" . $row2['observacion_lista_entrega'] . "</TD>";
-            $hojaExcel.="<TD style=background:$color>" . $row2['observacion_control_es'] . "</TD>";
-          if($opcion_vista == 1){   
-            $hojaExcel.="<TD style=background:$color><center> <a href=javascript:operar_tabla($cod_programacion,$row2[cod_observacion],4) title='Editar Observaci�n'><img src='../imagenes/editar.png' width='14' height='14' border='0' alt=''></a> </center></TD>"; 
-            $hojaExcel.="<TD style=background:$color><center> <a href=javascript:operar_tabla($cod_programacion,$row2[cod_observacion],5) title='Eliminar Observaci�n'><img src='../imagenes/borrar.png' width='14' height='14' border='0' alt=''></a> </center></TD>";
-            } 
-            $hojaExcel.="</TR>";
+            $hojaExcel.="<TR>"; 
+            $hojaExcel.="<TD style=background:$color>" . $row2['nombre_ingrediente'] . "</TD>";
+            /// CONSULTA DE INTERMCABIO SOBRE CADA PRODUCTO
+            $query_intercambios = "SELECT sicc24.ingrediente.nombre as nombre_ingrediente
+                                    FROM sicc24.intercambios 
+                                    INNER JOIN sicc24.ingrediente on sicc24.ingrediente.cod_ingrediente = sicc24.intercambios.cod_ingrediente_intercambio
+                                    where cod_programacion = $cod_programacion and cod_ingrediente_programado = $row2[codigo_ingrediente]";
+            // echo $query_intercambios;
+            $consulta_intecambios_ing = mysql_query($query_intercambios);
+            $nfilas_intercambio = mysql_num_rows ($consulta_intecambios_ing);
+            $intercambio = null;
+            
+            for ($inter=0;$inter<$nfilas_intercambio;$inter++){
+              $row_intercambio = mysql_fetch_array($consulta_intecambios_ing);
+              $intercambio = $row_intercambio['nombre_ingrediente'];
+            }
+            $hojaExcel.="<TD style=background:$color>". $intercambio ."</TD>";
+            if ($nfilas_intercambio == 0){
+              $hojaExcel.="<TD style=background:$color> <center><a href=javascript:operar_tabla($cod_programacion,$row2[codigo_ingrediente],1) title='Registrar Intercambio Producto'><img src='../imagenes/observacion.png' width='15' height='15' border='0' alt=''></a></center>" . "</TD>";
+              $hojaExcel.="<TD style=background:$color> <center>" . "</TD>";
+            }else{
+              $hojaExcel.="<TD style=background:$color> <center>" . "</TD>";
+              $hojaExcel.="<TD style=background:$color> <center><a href=javascript:operar_tabla($cod_programacion,$row2[codigo_ingrediente],5) title='Eliminar Intercambio Producto'><img src='../imagenes/borrar.png' width='15' height='15' border='0' alt=''></a></center>" . "</TD>";
+            }
+            
          }
          $hojaExcel.="</TABLE>";
          echo $hojaExcel;
