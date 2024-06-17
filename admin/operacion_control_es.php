@@ -302,108 +302,7 @@ $nfilas0 = mysql_num_rows ($consulta0);
                                         
 $logo_1 = "<img src='../imagenes/logo_min.png' width='150' height='60' />";
 $logo_2 = "<img src='../imagenes/escudo.png' width='60' height='60' />";
-$logo   = "<img src='../imagenes/$logo' width='100' height='60' />";
-
-
-////ESCUDO POR DEPARTAMENTO
-////Risaralda
-if ($cod_tipo_minuta == 3 || $cod_tipo_minuta == 4 || $cod_tipo_minuta == 50){
-    $logo_4 = "<img src='../imagenes/esc_risaralda.jpg' width='60' height='60' />";
-  }
-  
-////Risaralda PUREMBARA RISARALDA - ALMUERZOS
-if ($cod_tipo_minuta == 83 || $cod_tipo_minuta == 102){
-    $logo = "";
-    $logo_1 = "";
-    $logo_2 = "";
-    $logo_4 = "";      
-    $logo_3 = ""; 
-  } 
-    
-////Tolima
-if ($cod_tipo_minuta == 16 || $cod_tipo_minuta == 17 || $cod_tipo_minuta == 18){
-    $logo_4 = "<img src='../imagenes/esc_tolima.jpg' width='60' height='60' /><img src='../imagenes/tolima02.png' width='50' height='50' />";
-  } 
-  
-////Tolima - Melgar
-if ($cod_tipo_minuta == 65 || $cod_tipo_minuta == 66 || $cod_tipo_minuta == 67){
-    $logo_1 = "<img src='../imagenes/alcaldia_melgar.png' width='80' height='60' />";
-  }  
-////Quindio
-if ($cod_tipo_minuta == 19 || $cod_tipo_minuta == 20 || $cod_tipo_minuta == 21 || $cod_tipo_minuta == 22 || $cod_tipo_minuta == 23){
-    $logo_4 = "<img src='../imagenes/esc_quindio.jpg' width='60' height='60' />";
-  } 
-////Caqueta
-if ($cod_tipo_minuta == 57 || $cod_tipo_minuta == 58 || $cod_tipo_minuta == 59){
-    $logo_4 = "<img src='../imagenes/esc_caqueta.png' width='60' height='60' />";
-  }     
-
-////MINUTAS PAE ALMUERZOS
-if ($cod_tipo_minuta == 3 || $cod_tipo_minuta == 16 || $cod_tipo_minuta == 19 || $cod_tipo_minuta == 23 || $cod_tipo_minuta == 17 || $cod_tipo_minuta == 20 || 
-    $cod_tipo_minuta == 59){ 
-    
-    $logo_1 = "<img src='../imagenes/logo_min.png' width='250' height='70' />";    
-    $logo_2 = "<img src='../imagenes/escudo.png' width='97' height='90' />";
-    $encabezado_formato = "Rep�blica de Colombia <BR> Ministerio de Educaci�n Nacional";
- }
- 
-////TIPO MINUTAS INDUSTRIALIZADOS PAE = Q ALMUERZOS SE SEPARA POR ORDEN
-if ($cod_tipo_minuta == 4 || $cod_tipo_minuta == 50 || $cod_tipo_minuta == 18 || $cod_tipo_minuta == 21 || $cod_tipo_minuta == 22 || $cod_tipo_minuta == 57 || 
-    $cod_tipo_minuta == 58 ){
-    
-    $logo_1 = "<img src='../imagenes/logo_min.png' width='250' height='70' />";    
-    $logo_2 = "<img src='../imagenes/escudo.png' width='97' height='90' />";
-    $encabezado_formato = "Rep�blica de Colombia <BR> Ministerio de Educaci�n Nacional";  
-  
-  } 
-
- ////MINUTAS CDI Y HOGARES - VAN CON LOGO ICBF
-if ($cod_tipo_minuta == 8 || $cod_tipo_minuta == 9  || $cod_tipo_minuta == 10  || $cod_tipo_minuta == 14){
-    
-    $logo_1 = "<img src='../imagenes/logo_icbf.png' width='97' height='90' />";  
-    $logo_2 = "<img src='../imagenes/escudo.png' width='97' height='90' />";
-  } 
-
-if($cod_tipo_minuta == 0){
-   $logo_1 = "<img src='../imagenes/$logo' width='134' height='60' />";
-   $logo_2 = "<img src='../imagenes/escudo.png' width='97' height='90' />";
- }
-  
-if($cod_tipo_minuta == 0){
-   $logo_1 = "<img src='../imagenes/$logo' width='97' height='90' />";
-   $logo_2 = " "; 
- } 
- 
-////TIPO MINUTAS GIRARDOT ESCUDO ALCALDIA
-if ($cod_tipo_minuta == 0 || $cod_tipo_minuta == 0 || $cod_tipo_minuta == 0){
-    
-    $logo_1 = "<img src='../imagenes/logo_min.png' width='250' height='70' />";    
-    $logo_2 = "<img src='../imagenes/escudo.png' width='97' height='90' />&nbsp;&nbsp;<img src='../imagenes/logo_girardot.png' width='97' height='90' />";
-    $encabezado_formato = "Rep�blica de Colombia <BR> Ministerio de Educaci�n Nacional";  
-  
-  }  
-  
-////TIPO DE MINUTA 84    
- if($cod_tipo_minuta == 84){
-  $logo_1 = "";
-  $logo_2 = "";
-  $logo_3 = "";
-  $logo   = "<img src='../imagenes/$logo' width='100' height='60' />";  
-  }     
-
-   //////definimos LOGO  
-  if($cod_tipo_minuta == 6 || $cod_tipo_minuta == 7 || $cod_tipo_minuta == 51 || $cod_tipo_minuta == 74 || $cod_tipo_minuta == 15 || $cod_tipo_minuta == 60){////con logo de ICBF y construyamos
-     $logo_1 = "$logo";
-     $logo_2 = "<img src='../imagenes/logo_icbf.png' width='97' height='90' />"; 
-     $logo_4 = "";
-     $logo = "";
-    }  
-    
-////IBAGUE  
- if($cod_tipo_minuta == 85 || $cod_tipo_minuta == 86 || $cod_tipo_minuta == 87 || $cod_tipo_minuta == 88 || $cod_tipo_minuta == 89 || $cod_tipo_minuta == 90 || 
-    $cod_tipo_minuta == 92 || $cod_tipo_minuta == 93 || $cod_tipo_minuta == 94 || $cod_tipo_minuta == 95 || $cod_tipo_minuta == 96 || $cod_tipo_minuta == 97){
-    $logo_4 = "<img src='../imagenes/ibague_17.jpg' width='60' height='60' />";
-  }         
+$logo   = "<img src='../imagenes/$logo' width='100' height='100' />";
 
   // SE HACE MODIFICACION YA QUE LOS CUPOS QUE TRAE EL ACTA LOS TRAIA DE LA TABLA CUPOS, OSEA QUE EN CASO Q CAMBIARA CUPOS Y SE GENERABA EL ACTA LOS TRAIA CON LOS NUEVOS CUPOS
   $instruccion_nueva = "SELECT cupos AS cupos FROM item_programacion WHERE cod_programacion = $cod_programacion AND cod_escuela = $cod_escuela";
@@ -423,10 +322,11 @@ $hojaExcel.="<H1 class=SaltoDePagina>";
  ////ENCABEZADO DE LA TABLA DE RESULTADOS
 $hojaExcel.="<table width='100%'>";
   $hojaExcel.="<tr>";
-    $hojaExcel.="<td width='45%' height='74' align='center'>$logo_4&nbsp;&nbsp$logo_1 </td>";
-    $hojaExcel.="<th width='25%'>$nom_formato</th>";
-    $hojaExcel.="<td width='30%' align='center'> $logo_2 &nbsp;&nbsp; $logo</td>";
+    $hojaExcel.="<td width='14%'><center><img src='../imagenes/logo_icbf.png' width='100' height='100' /></center></td>";
+    $hojaExcel.="<th width='72%'>$nom_formato</th>";
+    $hojaExcel.="<td width='14%' align='center'>$logo</td>";
     $hojaExcel.="</tr>";
+
     $hojaExcel.="</table>";
     $hojaExcel.="<table width='100%'>";
     $hojaExcel.="<tr>";
@@ -747,14 +647,14 @@ $hojaExcel.="<H1 class=SaltoDePagina>";
 
 
  
-$hojaExcel.="<table width='98%'>";
-  $hojaExcel.="<tr>";
-    $hojaExcel.="<td width='50%' height='74'>$logo&nbsp;&nbsp;$logo_4&nbsp;&nbsp$logo_1</td>";
-    $hojaExcel.="<th width='30%'>REGISTRO Y CONTROL DE INVENTARIOS</th>";
-    $hojaExcel.="<td width='20%'>$logo_2</td>";
-    $hojaExcel.="</tr>";
+$hojaExcel.="<table width='100%'>";
+$hojaExcel.="<tr>";
+$hojaExcel.="<td width='14%'><center><img src='../imagenes/logo_icbf.png' width='100' height='100' /></center></td>";
+$hojaExcel.="<th width='72%'>$nom_formato</th>";
+$hojaExcel.="<td width='14%' align='center'>$logo</td>";
+$hojaExcel.="</tr>";
     $hojaExcel.="</table>";
-    $hojaExcel.="<table width='98%'>";
+    $hojaExcel.="<table width='100%'>";
     $hojaExcel.="<tr>";
     $hojaExcel.="<td width='10%'><strong>Regional</strong></td>";
     $hojaExcel.="<td width='15%'>$nom_departamento</td>";
@@ -770,7 +670,7 @@ $hojaExcel.="<table width='98%'>";
     $hojaExcel.="<td width='4%'>$total_cupos</td>";
   $hojaExcel.="</tr>";
 $hojaExcel.="</table>";
-$hojaExcel.="<table width='98%'>";
+$hojaExcel.="<table width='100%'>";
   $hojaExcel.="<tr>";
     $hojaExcel.="<td width='10%'><strong>Operador</strong></td>";
     $hojaExcel.="<td width='30%'>$nom_operador</td>";
@@ -802,7 +702,7 @@ for ($i=0; $i<$nfilasConsulta; $i++){
 //     $hojaExcel.="<td width='14%'><strong>Almuerzo:</strong> $mod_a</td>";
 //   $hojaExcel.="</tr>";
 // $hojaExcel.="</table> ";
-$hojaExcel.="<table width='98%'>";
+$hojaExcel.="<table width='100%'>";
   $hojaExcel.="<tr>";
     $hojaExcel.="<td width='33%'><strong>Ciclo de Menú:</strong> &nbsp; $nombre_Menus &nbsp;&nbsp;&nbsp;</td>";
     $hojaExcel.="<td width='33%'>$cad_fecha</td>";
@@ -810,7 +710,7 @@ $hojaExcel.="<table width='98%'>";
   $hojaExcel.="</tr>";
 $hojaExcel.="</table>";
 
-$hojaExcel.="<table width='98%'>";
+$hojaExcel.="<table width='100%'>";
   $hojaExcel.="<tr>";
     $hojaExcel.="<th>PRODUCTO</th>";
     $hojaExcel.="<th>UNIDAD BASE</th>";
@@ -939,7 +839,7 @@ $hojaExcel.="</table>";
 // $hojaExcel.="</H1>"; 
 // $hojaExcel.="<br>";  
 
-$hojaExcel.="<table width='98%'>";
+$hojaExcel.="<table width='100%'>";
 $hojaExcel.="<tr>";
     $hojaExcel.="<th width='13%' rowspan='3'>OBSERVACIONES</th>";
     $hojaExcel.="<td width='87%'>&nbsp;</td>";
@@ -953,7 +853,7 @@ $hojaExcel.="<tr>";
 // $hojaExcel.="</table>";
 
 $hojaExcel.="</table>"; 
-$hojaExcel.="<table width='98%'>";
+$hojaExcel.="<table width='100%'>";
 $hojaExcel.="<tr>";
   $hojaExcel.="<th colspan='2'>PERSONA RESPONSABLE QUE ENTREGA LOS ALIMENTOS</th>";
   $hojaExcel.="<th colspan='2'>PERSONA RESPONSABLE QUE RECIBE LOS ALIMENTOS</th>";

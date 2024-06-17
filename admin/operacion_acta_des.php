@@ -1249,7 +1249,7 @@ if($periodo_entrega != ''){
     $hojaExcel.="<tr>";
       $hojaExcel.="<td width='9%' height='74'>$logo1</td>";
       $hojaExcel.="<th width='78%' align='center'>$cadena_programacion</th>";
-      $hojaExcel.="<td width='13%'><img src='../imagenes/$logo' width='134' height='60' /></td>";
+      $hojaExcel.="<td width='13%'><center><img src='../imagenes/$logo' width='100' height='100' /></center></td>";
     $hojaExcel.="</tr>";
   $hojaExcel.="</table>";
   $hojaExcel.="<table width='98%' border='1'>";
@@ -1402,7 +1402,7 @@ $hojaExcel.="<table width='98%' border='1'>";
                      OR calculo_redondeado_escuela.cod_programacion = $cod_programacion21 OR calculo_redondeado_escuela.cod_programacion = $cod_programacion22
                      OR calculo_redondeado_escuela.cod_programacion = $cod_programacion23 OR calculo_redondeado_escuela.cod_programacion = $cod_programacion24) 
                         $condicion2 $condi_categoria  
-                  ORDER BY calculo_redondeado_escuela.cod_categoria_ingrediente, calculo_redondeado_escuela.cod_ingrediente";
+                  ORDER BY calculo_redondeado_escuela.cod_categoria_ingrediente, nom_ingrediente";
  
   $consulta1 = mysql_query($instruccion1);
   error_consulta($consulta1,$instruccion1);
@@ -2251,7 +2251,7 @@ $hojaExcel.="<table width='98%'' height='80' border='1'>";
   $hojaExcel.="<tr>";
     $hojaExcel.="<td width='9%' height='74'>$logo1</td>";
     $hojaExcel.="<th width='78%' align='center'>$cadena_programacion</th>";
-    $hojaExcel.="<td width='13%'><img src='../imagenes/$logo' width='134' height='60' /></td>";
+    $hojaExcel.="<td width='13%'><center><img src='../imagenes/$logo' width='100' height='100' /></center></td>";
   $hojaExcel.="</tr>";
 $hojaExcel.="</table>";
 $hojaExcel.="<table width='98%' border='1'>";

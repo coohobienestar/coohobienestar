@@ -78,7 +78,7 @@ $tipo = $_GET['tipo'];
     $nom_tipo_minuta = $row['nom_tipo_minuta'];                           
     // echo($cod_modalidad);
   ////BUSCAMOS LOS DATOS DE LA PROGRAMACION ESPECIFICADA POR LOS PARAMETROS
-  $instruccion2 ="SELECT DISTINCT calculo_requerimientos.cod_ciclo AS cod_ciclo, ciclo.nombre AS nom_ciclo, calculo_requerimientos.cod_escuela AS cod_escuela, 
+  $instruccion2 ="SELECT DISTINCT calculo_requerimientos.cod_ciclo AS cod_ciclo, ciclo.nombre AS nom_ciclo, calculo_requerimientos.cod_escuela AS cod_escuela,
                                   escuela.nombre AS nom_escuela, calculo_requerimientos.cod_departamento AS cod_departamento, 
                                   departamento.nombre AS nom_departamento, calculo_requerimientos.cod_municipio, municipio.nombre AS nom_municipio
                   FROM calculo_requerimientos
@@ -273,9 +273,9 @@ $hojaExcel.="<H1 class=SaltoDePagina>";
  ////ENCABEZADO DE LA TABLA DE RESULTADOS
 $hojaExcel.="<table width='98%'' height='80'>";
   $hojaExcel.="<tr>";
-    $hojaExcel.="<td width='9%' height='74'><img src='../imagenes/logo_icbf.png' width='95' height='91' /></td>";
-    $hojaExcel.="<th width='78%' align='center'>$nom_formato</th>";
-    $hojaExcel.="<td width='13%'><img src='../imagenes/$logo' width='134' height='60' /></td>";
+    $hojaExcel.="<td width='14%' height='74'><center><img src='../imagenes/logo_icbf.png' width='100' height='100' /></center></td>";
+    $hojaExcel.="<th width='72%' align='center'>$nom_formato</th>";
+    $hojaExcel.="<td width='14%'><center><img src='../imagenes/$logo' width='100' height='100' /></center></td>";
     $hojaExcel.="</tr>";
     $hojaExcel.="</table>";
     $hojaExcel.="<table width='98%'>";
@@ -343,7 +343,7 @@ $hojaExcel.="<table width='98%'>";
     $hojaExcel.="<th width='2%'  rowspan='4' align='center'>#</th>";
     $hojaExcel.="<th width='20%' rowspan='4' align='center'>Producto</th>";
     if($nfilas_intercambio_programacion > 0){
-      $hojaExcel.="<th width='20%' rowspan='4' align='center'>Intercambios</th>";
+      $hojaExcel.="<th width='15%' rowspan='4' align='center'>Intercambio</th>";
     }
 
     // $hojaExcel.="<th width='20%' colspan='$nfilas_re' rowspan='3' align='center'>Cantidad de alimento seg�n minuta por grupo de edad</th>";
@@ -374,7 +374,7 @@ $hojaExcel.="<table width='98%'>";
         $nom_rango = $row6['nombre'];
         $nom_rango = $nom_rango;
         
-        $hojaExcel.="<td  width='18%' align='center'>$nom_rango</td>";      
+        $hojaExcel.="<td  width='8%' align='center'>$nom_rango</td>";      
        } 
    $hojaExcel.="</tr>";                                         
    $hojaExcel.="<tr>";
@@ -385,7 +385,7 @@ $hojaExcel.="<table width='98%'>";
                       WHERE calculo_requerimientos.cod_programacion = $cod_programacion AND calculo_requerimientos.cod_modalidad = $cod_modalidad
                         AND calculo_requerimientos.cod_municipio = $cod_municipio AND calculo_requerimientos.cod_escuela = $cod_escuela
                         AND calculo_requerimientos.cod_tipo_minuta = $cod_tipo_minuta";
-     
+
       $consulta6 = mysql_query($instruccion6);
       error_consulta($consulta6,$instruccion6);
       $nfilas6 = mysql_num_rows ($consulta6);
@@ -446,7 +446,7 @@ $hojaExcel.="<table width='98%'>";
                         AND calculo_requerimientos.cod_municipio = $cod_municipio AND calculo_requerimientos.cod_modalidad = $cod_modalidad
                         AND calculo_requerimientos.cod_tipo_minuta = $cod_tipo_minuta
                       GROUP BY calculo_requerimientos.cod_ingrediente
-                      ORDER BY calculo_requerimientos.cod_categoria_ingrediente, calculo_requerimientos.cod_ingrediente";
+                      ORDER BY calculo_requerimientos.cod_categoria_ingrediente, nom_ingrediente";
      
       $consulta7 = mysql_query($instruccion7);
       error_consulta($consulta7,$instruccion7);

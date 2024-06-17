@@ -221,7 +221,7 @@ if($tipo_operacion == 9){
     <td>&nbsp;</td>
   </tr>       
   <tr>
-   <td align="center" width="100%" colspan="2" height="34"><input type="submit" value="Registrar" onclick='return confirm("¿La información a registrar esta completa y correcta? \n Por favor verifique...")'></td>
+   <td align="center" width="100%" colspan="2" height="34"><input type="submit" value="Registrar" onclick='return confirm("ï¿½La informaciï¿½n a registrar esta completa y correcta? \n Por favor verifique...")'></td>
   </tr>
  <?php
   }
@@ -240,7 +240,7 @@ if($tipo_operacion == 9){
     <td>&nbsp;</td>
   </tr>       
   <tr>
-   <td align="center" width="100%" colspan="2" height="34"><input type="submit" value="Eliminar" onclick='return confirm("¿Seguro que desea Eliminar la siguiente información? \n Menu: <?php print("[$cod_menu] - $nom_menu");?> \n Por favor verifique...")'></td>
+   <td align="center" width="100%" colspan="2" height="34"><input type="submit" value="Eliminar" onclick='return confirm("ï¿½Seguro que desea Eliminar la siguiente informaciï¿½n? \n Menu: <?php print("[$cod_menu] - $nom_menu");?> \n Por favor verifique...")'></td>
   </tr> 
  <?php
   }
@@ -263,7 +263,7 @@ if($tipo_operacion == 9){
     <td>&nbsp;</td>
   </tr>       
   <tr>
-   <td align="center" width="100%" colspan="2" height="34"><input type="submit" value="Eliminar" onclick='return confirm("¿Seguro que desea Eliminar la siguiente información? \n Plato: <?php print("[$cod_plato] - $nom_plato");?> \n Por favor verifique...")'></td>
+   <td align="center" width="100%" colspan="2" height="34"><input type="submit" value="Eliminar" onclick='return confirm("ï¿½Seguro que desea Eliminar la siguiente informaciï¿½n? \n Plato: <?php print("[$cod_plato] - $nom_plato");?> \n Por favor verifique...")'></td>
   </tr>   
  <?php
   }
@@ -294,7 +294,7 @@ if($tipo_operacion == 9){
     <td>&nbsp;</td>
   </tr>       
   <tr>
-   <td align="center" width="100%" colspan="2" height="34"><input type="submit" value="Eliminar" onclick='return confirm("¿Seguro que desea Eliminar la siguiente información? \n Ingrediente: <?php print("[$cod_ingrediente] - $nom_ingrediente");?> \n Por favor verifique...")'></td>
+   <td align="center" width="100%" colspan="2" height="34"><input type="submit" value="Eliminar" onclick='return confirm("ï¿½Seguro que desea Eliminar la siguiente informaciï¿½n? \n Ingrediente: <?php print("[$cod_ingrediente] - $nom_ingrediente");?> \n Por favor verifique...")'></td>
   </tr>     
  <?php
   } 
@@ -325,7 +325,7 @@ if($tipo_operacion == 9){
     <td>&nbsp;</td>
   </tr>       
   <tr>
-   <td align="center" width="100%" colspan="2" height="34"><input type="submit" value="Registrar" onclick='return confirm("¿La información a registrar esta completa y correcta? \n Por favor verifique...")'></td>
+   <td align="center" width="100%" colspan="2" height="34"><input type="submit" value="Registrar" onclick='return confirm("ï¿½La informaciï¿½n a registrar esta completa y correcta? \n Por favor verifique...")'></td>
   </tr>  
  <?php
   }
@@ -373,7 +373,7 @@ if($tipo_operacion == 9){
     <td>&nbsp;</td>
   </tr>       
   <tr>
-   <td align="center" width="100%" colspan="2" height="34"><input type="submit" value="Registrar" onclick='return confirm("¿La información a registrar esta completa y correcta? \n Por favor verifique...")'></td>
+   <td align="center" width="100%" colspan="2" height="34"><input type="submit" value="Registrar" onclick='return confirm("ï¿½La informaciï¿½n a registrar esta completa y correcta? \n Por favor verifique...")'></td>
   </tr> 
  <?php
   }
@@ -434,7 +434,7 @@ if($tipo_operacion == 9){
     <td>&nbsp;</td>
   </tr>       
   <tr>
-   <td align="center" width="100%" colspan="2" height="34"><input type="submit" value="Registrar" onclick='return confirm("¿La información a registrar esta completa y correcta? \n Por favor verifique...")'></td>
+   <td align="center" width="100%" colspan="2" height="34"><input type="submit" value="Registrar" onclick='return confirm("ï¿½La informaciï¿½n a registrar esta completa y correcta? \n Por favor verifique...")'></td>
   </tr>  
  <?php
    } 
@@ -512,7 +512,7 @@ if($tipo_operacion == 9){
     <td>&nbsp;</td>
   </tr>       
   <tr>
-   <td align="center" width="100%" colspan="2" height="34"><input type="submit" value="Registrar" onclick='return confirm("¿La información a registrar esta completa y correcta? \n Por favor verifique...")'></td>
+   <td align="center" width="100%" colspan="2" height="34"><input type="submit" value="Registrar" onclick='return confirm("ï¿½La informaciï¿½n a registrar esta completa y correcta? \n Por favor verifique...")'></td>
   </tr> 
  <?php
    } 
@@ -539,7 +539,7 @@ if($tipo_operacion == 9){
       
           print("<option value=".$valdesc_m.">".$descp_m."</option>");  
         do{ 
-           print("<option value=".$row_m['cod_minuta'].">[".$row_m['cod_minuta']."] - ".$row_m['nombre']."</option>");
+           print("<option value=".$row_m['cod_minuta'].">".$row_m['cod_minuta']." - ".$row_m['nombre']."</option>");
         }while ($row_m = mysql_fetch_array($consulta_m)); 
         print("</SELECT></TD>");
   ?>
@@ -548,7 +548,7 @@ if($tipo_operacion == 9){
     <td>&nbsp;</td>
   </tr>       
   <tr>
-   <td align="center" width="100%" colspan="2" height="34"><input type="submit" value="Registrar" onclick='return confirm("¿La información a registrar esta completa y correcta? \n Por favor verifique...")'></td>
+   <td align="center" width="100%" colspan="2" height="34"><input type="submit" value="Registrar" onclick='return confirm("ï¿½La informaciï¿½n a registrar esta completa y correcta? \n Por favor verifique...")'></td>
   </tr> 
  <?php
    } 
@@ -559,6 +559,6 @@ if($tipo_operacion == 9){
 </html>
 
 <?php
-// Cerrar conexión
+// Cerrar conexiï¿½n
 mysql_close ($conexion);   
 ?>

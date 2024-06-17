@@ -177,7 +177,7 @@ $ape_usuario = $row['ape_usuario'];
       
           print("<option value=".$valdesc.">".$descp."</option>");  
         do{ 
-           print("<option value=".$row['cod_programacion'].">[".$row['cod_programacion']."] - [".$row['nombre']."]</option>");
+           print("<option value=".$row['cod_programacion'].">".$row['cod_programacion']." - [".$row['nombre']."]</option>");
         }while ($row = mysql_fetch_array($consulta)); 
         print("</SELECT></TD>");  
    ?>
