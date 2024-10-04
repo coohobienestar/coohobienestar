@@ -331,6 +331,12 @@ $consulta_int_programacion = mysql_query($intercambio_programacion);
 error_consulta($consulta_int_programacion,$intercambio_programacion);
 $nfilas_intercambio_programacion = mysql_num_rows ($consulta_int_programacion);
 
+#consulta para saber si existen marcas en la programacion
+$marcas_programacion = "SELECT cod_programacion FROM sicc24.marcas WHERE cod_programacion = $cod_programacion";
+$consulta_marcas_programacion = mysql_query($marcas_programacion);
+error_consulta($consulta_marcas_programacion,$marcas_programacion);
+$nfilas_marcas_programacion = mysql_num_rows ($consulta_marcas_programacion);
+
 $hojaExcel.="<table width='98%'>";
   $hojaExcel.="<tr>";
     $hojaExcel.="<td width='33%'><strong>Ciclo de Menú:</strong> &nbsp; $nombre_Menus &nbsp;&nbsp;&nbsp;</td>";
@@ -345,7 +351,9 @@ $hojaExcel.="<table width='98%'>";
     if($nfilas_intercambio_programacion > 0){
       $hojaExcel.="<th width='15%' rowspan='4' align='center'>Intercambio</th>";
     }
-
+    if($nfilas_marcas_programacion > 0){
+      $hojaExcel.="<th width='10%' rowspan='4' align='center'>Marca</th>";
+    }
     // $hojaExcel.="<th width='20%' colspan='$nfilas_re' rowspan='3' align='center'>Cantidad de alimento seg�n minuta por grupo de edad</th>";
     $hojaExcel.="<th width='20%' colspan='$nfilas_re' align='center'>Número de niños por Rango Edad</th>";
     // $hojaExcel.="<th width='10%' rowspan='4' align='center'>Suma total en unidad de medida GR o CC</th>";
@@ -487,12 +495,32 @@ $hojaExcel.="<table width='98%'>";
           error_consulta($consulta_intercambio,$instruccion_intercambio);
           $nfilas_intercambio = mysql_num_rows ($consulta_intercambio);
           if ($nfilas_intercambio == 0){
-            $hojaExcel.="<td width='5%'></td>";
+            $hojaExcel.="<td width='3%'></td>";
           }else{
             for ($inter=0;$inter<$nfilas_intercambio;$inter++){
               $row_intercambio = mysql_fetch_array($consulta_intercambio);
               $intercambio = $row_intercambio['nombre_intercambio'];
-              $hojaExcel.="<td width='5%'>$intercambio</td>";
+              $hojaExcel.="<td width='3%'>$intercambio</td>";
+            }
+          }   
+        }
+
+        //CONSULTA MARCAS EN LA PROGRAMACION
+        if ($nfilas_marcas_programacion > 0){
+          $instruccion_marcas = "SELECT *
+                                      FROM sicc24.marcas
+                                      WHERE cod_programacion = $cod_programacion AND cod_ingrediente_programado = $cod_ingrediente";
+                                                
+          $consulta_marcas = mysql_query($instruccion_marcas);
+          error_consulta($consulta_marcas,$instruccion_marcas);
+          $nfilas_marcas = mysql_num_rows ($consulta_marcas);
+          if ($nfilas_marcas == 0){
+            $hojaExcel.="<td width='5%'></td>";
+          }else{
+            for ($marc=0;$marc<$nfilas_marcas;$marc++){
+              $row_marca = mysql_fetch_array($consulta_marcas);
+              $marca = $row_marca['nombre_marca'];
+              $hojaExcel.="<td width='5%'>$marca</td>";
             }
           }   
         }
