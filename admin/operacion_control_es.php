@@ -365,10 +365,10 @@ $hojaExcel.="</table>";
 $hojaExcel.="<table width='100%'>";
 
 /// CONSULTA DE LOS MENUS PROGRAMADOS
-$instruccion6 = "SELECT DISTINCT sicc24.calculo_requerimientos.cod_menu as cod_menu,
-                        sicc24.menu.nombre as nombre_menu
-                        from sicc24.calculo_requerimientos
-                        inner join sicc24.menu on sicc24.calculo_requerimientos.cod_menu  = sicc24.menu.cod_menu
+$instruccion6 = "SELECT DISTINCT calculo_requerimientos.cod_menu as cod_menu,
+                        menu.nombre as nombre_menu
+                        from calculo_requerimientos
+                        inner join menu on calculo_requerimientos.cod_menu  = menu.cod_menu
                         where cod_programacion = $cod_programacion";
 
   $consulta6 = mysql_query($instruccion6);

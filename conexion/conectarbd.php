@@ -11,7 +11,7 @@ function Conectarse(){
       exit();
    }
    // $link->set_charset("utf8");
-   mysql_select_db("sicc24", $link);
+   mysql_select_db("sicc25", $link);
    return $link;
 
 }

@@ -326,13 +326,13 @@ for ($i=0; $i<$nfilasConsulta; $i++){
   $nombre_Menus = $row6['nombre_menu']; 
  }
 #consulta para saber si existen intermbios en la programacion
-$intercambio_programacion = "SELECT cod_programacion FROM sicc24.intercambios WHERE cod_programacion = $cod_programacion";
+$intercambio_programacion = "SELECT cod_programacion FROM intercambios WHERE cod_programacion = $cod_programacion";
 $consulta_int_programacion = mysql_query($intercambio_programacion);
 error_consulta($consulta_int_programacion,$intercambio_programacion);
 $nfilas_intercambio_programacion = mysql_num_rows ($consulta_int_programacion);
 
 #consulta para saber si existen marcas en la programacion
-$marcas_programacion = "SELECT cod_programacion FROM sicc24.marcas WHERE cod_programacion = $cod_programacion";
+$marcas_programacion = "SELECT cod_programacion FROM marcas WHERE cod_programacion = $cod_programacion";
 $consulta_marcas_programacion = mysql_query($marcas_programacion);
 error_consulta($consulta_marcas_programacion,$marcas_programacion);
 $nfilas_marcas_programacion = mysql_num_rows ($consulta_marcas_programacion);
@@ -484,11 +484,11 @@ $hojaExcel.="<table width='98%'>";
 
         //CONSULTA INTERCAMBIOS EN LA PROGRAMACION
         if ($nfilas_intercambio_programacion > 0){
-          $instruccion_intercambio = "SELECT sicc24.intercambios.cod_ingrediente_programado AS cod_ingrediente_programado,
-                                      sicc24.intercambios.cod_ingrediente_intercambio AS cod_ingrediente_intercambio, 
-                                      sicc24.ingrediente.nombre AS nombre_intercambio
-                                      FROM sicc24.intercambios
-                                      INNER JOIN sicc24.ingrediente ON sicc24.ingrediente.cod_ingrediente = sicc24.intercambios.cod_ingrediente_intercambio
+          $instruccion_intercambio = "SELECT intercambios.cod_ingrediente_programado AS cod_ingrediente_programado,
+                                      intercambios.cod_ingrediente_intercambio AS cod_ingrediente_intercambio, 
+                                      ingrediente.nombre AS nombre_intercambio
+                                      FROM intercambios
+                                      INNER JOIN ingrediente ON ingrediente.cod_ingrediente = intercambios.cod_ingrediente_intercambio
                                       WHERE cod_programacion = $cod_programacion AND cod_ingrediente_programado = $cod_ingrediente";
                                       
           $consulta_intercambio = mysql_query($instruccion_intercambio);
@@ -508,7 +508,7 @@ $hojaExcel.="<table width='98%'>";
         //CONSULTA MARCAS EN LA PROGRAMACION
         if ($nfilas_marcas_programacion > 0){
           $instruccion_marcas = "SELECT *
-                                      FROM sicc24.marcas
+                                      FROM marcas
                                       WHERE cod_programacion = $cod_programacion AND cod_ingrediente_programado = $cod_ingrediente";
                                                 
           $consulta_marcas = mysql_query($instruccion_marcas);
@@ -708,6 +708,12 @@ $hojaExcel.="<table width='98%'>";
     $hojaExcel.="<td><strong>TELEFONO</strong></td>";
     $hojaExcel.="<td>&nbsp;</td>";
     $hojaExcel.="<td><strong>TELEFONO</strong></td>";
+    $hojaExcel.="<td>&nbsp;</td>"; 
+  $hojaExcel.="</tr>";
+  $hojaExcel.="<tr>";
+    $hojaExcel.="<td><strong>FECHA Y HORA</strong></td>";
+    $hojaExcel.="<td>&nbsp;</td>";
+    $hojaExcel.="<td><strong>FECHA Y HORA</strong></td>";
     $hojaExcel.="<td>&nbsp;</td>"; 
   $hojaExcel.="</tr>";
  $hojaExcel.="</table>";

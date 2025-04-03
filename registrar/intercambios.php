@@ -225,9 +225,9 @@ error_consulta($result,$registro);
             $hojaExcel.="<TR>"; 
             $hojaExcel.="<TD style=background:$color>" . $row2['nombre_ingrediente'] . "</TD>";
             /// CONSULTA DE INTERMCABIO SOBRE CADA PRODUCTO
-            $query_intercambios = "SELECT sicc24.ingrediente.nombre as nombre_ingrediente
-                                    FROM sicc24.intercambios 
-                                    INNER JOIN sicc24.ingrediente on sicc24.ingrediente.cod_ingrediente = sicc24.intercambios.cod_ingrediente_intercambio
+            $query_intercambios = "SELECT ingrediente.nombre as nombre_ingrediente
+                                    FROM intercambios 
+                                    INNER JOIN ingrediente on ingrediente.cod_ingrediente = intercambios.cod_ingrediente_intercambio
                                     where cod_programacion = $cod_programacion and cod_ingrediente_programado = $row2[codigo_ingrediente]";
             // echo $query_intercambios;
             $consulta_intecambios_ing = mysql_query($query_intercambios);

@@ -226,7 +226,7 @@ error_consulta($result,$registro);
             $hojaExcel.="<TD style=background:$color>" . $row2['nombre_ingrediente'] . "</TD>";
             /// CONSULTA DE MARCA SOBRE CADA PRODUCTO
             $query_marcas = "SELECT *
-                                    FROM sicc24.marcas
+                                    FROM marcas
                                     
                                     where cod_programacion = $cod_programacion and cod_ingrediente_programado = $row2[codigo_ingrediente]";
             // echo $query_intercambios;
