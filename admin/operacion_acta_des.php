@@ -2413,6 +2413,14 @@ $hojaExcel.="<table width='98%'>";
     $hojaExcel.="<td><strong>FECHA Y HORA</strong></td>";
     $hojaExcel.="<td>&nbsp;</td>";
   $hojaExcel.="</tr>";
+    $hojaExcel .= "<tr style='border-bottom: hidden;
+      border-left: hidden;
+      border-right: hidden;
+      margin-top: 10px;'>";
+    $hojaExcel .= "<td colspan='4' style='text-align: right; border:none;'>";
+    $hojaExcel .= "Pag. " . ($n + 1);
+    $hojaExcel .= "</td>";
+  $hojaExcel .= "</tr>";
 $hojaExcel.="</table>"; 
 
 $hojaExcel.="<br>";
