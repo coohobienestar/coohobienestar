@@ -43,7 +43,7 @@ error_consulta($result,$registro);
       }
   if(($cod_usuario != '') && ($autorizado==1)){
     }else{
-      die("<br>No ha iniciado una sesión O no puede acceder a esta pagina por su perfil.");
+      die("<br>No ha iniciado una sesiï¿½n O no puede acceder a esta pagina por su perfil.");
       } 
 
 ?>
@@ -155,7 +155,7 @@ error_consulta($result,$registro);
 <table width='90%'>
 <tr>
 <td width='30%' style='font-weight:bold; color: white' align="left">Bienvenido&nbsp;&nbsp;&nbsp;<img src="../imagenes/usuario.png">&nbsp;&nbsp;&nbsp;<?php print("$nom_usuario $ape_usuario");?></td>
-<td width='30%' style='font-weight:bold; color: white' align="right"><a href="../menu_retorna.php" align="right"><img src="../imagenes/retornar.png">&nbsp;Retornar</a> | <a href="../logout.php"><img src="../imagenes/exit.png">&nbsp;Cerrar sesión</a></td>
+<td width='30%' style='font-weight:bold; color: white' align="right"><a href="../menu_retorna.php" align="right"><img src="../imagenes/retornar.png">&nbsp;Retornar</a> | <a href="../logout.php"><img src="../imagenes/exit.png">&nbsp;Cerrar sesiï¿½n</a></td>
 </tr>
 </table>
 <br>
@@ -177,7 +177,7 @@ session_start();
         }
     if(($cod_usuario != '') && ($autorizado==1)){
       }else{
-        die("<br>No ha iniciado una sesión 1 O no puede acceder a esta pagina por su perfil.");
+        die("<br>No ha iniciado una sesiï¿½n 1 O no puede acceder a esta pagina por su perfil.");
         } 
 
       ////RECIBIMOS LOS PARAMETROS Q VIENEN EN LA URL
@@ -242,7 +242,7 @@ session_start();
       print ("<TR style='font-weight:bold; color: white'>");
       
       ////BUSCAMOS LAS PROGRAMACIONES
-      print ("<TD>Programación 1 ");
+      print ("<TD>Programaciï¿½n 1 ");
       print ("&nbsp;&nbsp;<img src='../imagenes/requerido.gif'><SELECT NAME='programacion'>");                
 
       $instruccion = "SELECT DISTINCT programacion.cod_programacion AS cod_programacion, ciclo.nombre AS nombre
@@ -262,7 +262,7 @@ session_start();
         print("</SELECT></TD>");    
 
       ////BUSCAMOS LAS PROGRAMACIONES
-      print ("<TD>Programación 2 ");
+      print ("<TD>Programaciï¿½n 2 ");
       print ("&nbsp;&nbsp;<img src='../imagenes/requerido.gif'><SELECT NAME='programacion2'>");                
 
       $instruccion = "SELECT DISTINCT programacion.cod_programacion AS cod_programacion, ciclo.nombre AS nombre
@@ -282,7 +282,7 @@ session_start();
         print("</SELECT></TD></TR>");             
         
       ////BUSCAMOS LAS PROGRAMACIONES
-      print ("<TR  style='font-weight:bold; color: white'><TD>Programación 3");
+      print ("<TR  style='font-weight:bold; color: white'><TD>Programaciï¿½n 3");
       print ("&nbsp;&nbsp;<img src='../imagenes/requerido.gif'><SELECT NAME='programacion3'>");                
 
       $instruccion = "SELECT DISTINCT programacion.cod_programacion AS cod_programacion, ciclo.nombre AS nombre
@@ -302,7 +302,7 @@ session_start();
         print("</SELECT></TD>");         
 
       ////BUSCAMOS LAS PROGRAMACIONES
-      print ("<TD>Programación 4");
+      print ("<TD>Programaciï¿½n 4");
       print ("&nbsp;&nbsp;<img src='../imagenes/requerido.gif'><SELECT NAME='programacion4'>");                
 
       $instruccion = "SELECT DISTINCT programacion.cod_programacion AS cod_programacion, ciclo.nombre AS nombre
@@ -322,7 +322,7 @@ session_start();
         print("</SELECT></TD></TR>");  
         
       ////BUSCAMOS LAS PROGRAMACIONES
-      print ("<TR style='font-weight:bold; color: white'><TD>Programación 5");
+      print ("<TR style='font-weight:bold; color: white'><TD>Programaciï¿½n 5");
       print ("&nbsp;&nbsp;<img src='../imagenes/requerido.gif'><SELECT NAME='programacion5'>");                
 
       $instruccion = "SELECT DISTINCT programacion.cod_programacion AS cod_programacion, ciclo.nombre AS nombre
@@ -342,7 +342,7 @@ session_start();
         print("</SELECT></TD>"); 
         
       ////BUSCAMOS LAS PROGRAMACIONES
-      print ("<TD>Programación 6");
+      print ("<TD>Programaciï¿½n 6");
       print ("&nbsp;&nbsp;<img src='../imagenes/requerido.gif'><SELECT NAME='programacion6'>");                
 
       $instruccion = "SELECT DISTINCT programacion.cod_programacion AS cod_programacion, ciclo.nombre AS nombre
@@ -362,7 +362,7 @@ session_start();
         print("</SELECT></TD></TR>");                
 
       ////BUSCAMOS LAS PROGRAMACIONES   7
-      print ("<TR style='font-weight:bold; color: white'><TD>Programación 7");
+      print ("<TR style='font-weight:bold; color: white'><TD>Programaciï¿½n 7");
       print ("&nbsp;&nbsp;<img src='../imagenes/requerido.gif'><SELECT NAME='programacion7'>");                
 
       $instruccion = "SELECT DISTINCT programacion.cod_programacion AS cod_programacion, ciclo.nombre AS nombre
@@ -382,7 +382,7 @@ session_start();
         print("</SELECT></TD>");   
         
       ////BUSCAMOS LAS PROGRAMACIONES   8 
-      print ("<TD>Programación 8");
+      print ("<TD>Programaciï¿½n 8");
       print ("&nbsp;&nbsp;<img src='../imagenes/requerido.gif'><SELECT NAME='programacion8'>");                
 
       $instruccion = "SELECT DISTINCT programacion.cod_programacion AS cod_programacion, ciclo.nombre AS nombre
@@ -402,7 +402,7 @@ session_start();
         print("</SELECT></TD></TR>");  
 
 ////BUSCAMOS LAS PROGRAMACIONES   9
-      print ("<TR style='font-weight:bold; color: white'><TD>Programación 9");
+      print ("<TR style='font-weight:bold; color: white'><TD>Programaciï¿½n 9");
       print ("&nbsp;&nbsp;<img src='../imagenes/requerido.gif'><SELECT NAME='programacion9'>");                
 
       $instruccion = "SELECT DISTINCT programacion.cod_programacion AS cod_programacion, ciclo.nombre AS nombre
@@ -422,7 +422,7 @@ session_start();
         print("</SELECT></TD>");   
         
       ////BUSCAMOS LAS PROGRAMACIONES   10
-      print ("<TD>Programación 10");
+      print ("<TD>Programaciï¿½n 10");
       print ("&nbsp;&nbsp;<img src='../imagenes/requerido.gif'><SELECT NAME='programacion10'>");                
 
       $instruccion = "SELECT DISTINCT programacion.cod_programacion AS cod_programacion, ciclo.nombre AS nombre
@@ -442,7 +442,7 @@ session_start();
         print("</SELECT></TD></TR>"); 
 
 ////BUSCAMOS LAS PROGRAMACIONES   11
-      print ("<TR style='font-weight:bold; color: white'><TD>Programación 11");
+      print ("<TR style='font-weight:bold; color: white'><TD>Programaciï¿½n 11");
       print ("&nbsp;&nbsp;<img src='../imagenes/requerido.gif'><SELECT NAME='programacion11'>");                
 
       $instruccion = "SELECT DISTINCT programacion.cod_programacion AS cod_programacion, ciclo.nombre AS nombre
@@ -462,7 +462,7 @@ session_start();
         print("</SELECT>"); 
         
 ////BUSCAMOS LAS PROGRAMACIONES   12
-      print ("<TD>Programación 12");
+      print ("<TD>Programaciï¿½n 12");
       print ("&nbsp;&nbsp;<img src='../imagenes/requerido.gif'><SELECT NAME='programacion12'>");                
 
       $instruccion = "SELECT DISTINCT programacion.cod_programacion AS cod_programacion, ciclo.nombre AS nombre
@@ -482,7 +482,7 @@ session_start();
         print("</SELECT></TD></TR>");   
         
       ////BUSCAMOS LAS PROGRAMACIONES   13
-      print ("<TR style='font-weight:bold; color: white'><TD>Programación 13");
+      print ("<TR style='font-weight:bold; color: white'><TD>Programaciï¿½n 13");
       print ("&nbsp;&nbsp;<img src='../imagenes/requerido.gif'><SELECT NAME='programacion13'>");                
 
       $instruccion = "SELECT DISTINCT programacion.cod_programacion AS cod_programacion, ciclo.nombre AS nombre
@@ -502,7 +502,7 @@ session_start();
         print("</SELECT></TD>");     
         
      ////BUSCAMOS LAS PROGRAMACIONES   14
-      print ("<TD>Programación 14");     
+      print ("<TD>Programaciï¿½n 14");     
       print ("&nbsp;&nbsp;<img src='../imagenes/requerido.gif'><SELECT NAME='programacion14'>");                
 
       $instruccion = "SELECT DISTINCT programacion.cod_programacion AS cod_programacion, ciclo.nombre AS nombre
@@ -522,7 +522,7 @@ session_start();
         print("</SELECT></TD></TR>");  
         
  ////BUSCAMOS LAS PROGRAMACIONES   15
-      print ("<TR style='font-weight:bold; color: white'><TD>Programación 15");
+      print ("<TR style='font-weight:bold; color: white'><TD>Programaciï¿½n 15");
       print ("&nbsp;&nbsp;<img src='../imagenes/requerido.gif'><SELECT NAME='programacion15'>");                
 
       $instruccion = "SELECT DISTINCT programacion.cod_programacion AS cod_programacion, ciclo.nombre AS nombre
@@ -542,7 +542,7 @@ session_start();
         print("</SELECT></TD>");     
         
      ////BUSCAMOS LAS PROGRAMACIONES   16
-      print ("<TD>Programación 16");     
+      print ("<TD>Programaciï¿½n 16");     
       print ("&nbsp;&nbsp;<img src='../imagenes/requerido.gif'><SELECT NAME='programacion16'>");                
 
       $instruccion = "SELECT DISTINCT programacion.cod_programacion AS cod_programacion, ciclo.nombre AS nombre
@@ -562,7 +562,7 @@ session_start();
         print("</SELECT></TD></TR>");  
         
  ////BUSCAMOS LAS PROGRAMACIONES   17
-      print ("<TR style='font-weight:bold; color: white'><TD>Programación 17");
+      print ("<TR style='font-weight:bold; color: white'><TD>Programaciï¿½n 17");
       print ("&nbsp;&nbsp;<img src='../imagenes/requerido.gif'><SELECT NAME='programacion17'>");                
 
       $instruccion = "SELECT DISTINCT programacion.cod_programacion AS cod_programacion, ciclo.nombre AS nombre
@@ -582,7 +582,7 @@ session_start();
         print("</SELECT></TD>");     
         
      ////BUSCAMOS LAS PROGRAMACIONES   18
-      print ("<TD>Programación 18");     
+      print ("<TD>Programaciï¿½n 18");     
       print ("&nbsp;&nbsp;<img src='../imagenes/requerido.gif'><SELECT NAME='programacion18'>");                
 
       $instruccion = "SELECT DISTINCT programacion.cod_programacion AS cod_programacion, ciclo.nombre AS nombre
@@ -602,7 +602,7 @@ session_start();
         print("</SELECT></TD></TR>");  
         
  ////BUSCAMOS LAS PROGRAMACIONES   19
-      print ("<TR style='font-weight:bold; color: white'><TD>Programación 19");
+      print ("<TR style='font-weight:bold; color: white'><TD>Programaciï¿½n 19");
       print ("&nbsp;&nbsp;<img src='../imagenes/requerido.gif'><SELECT NAME='programacion19'>");                
 
       $instruccion = "SELECT DISTINCT programacion.cod_programacion AS cod_programacion, ciclo.nombre AS nombre
@@ -622,7 +622,7 @@ session_start();
         print("</SELECT></TD>");     
         
      ////BUSCAMOS LAS PROGRAMACIONES   20
-      print ("<TD>Programación 20");     
+      print ("<TD>Programaciï¿½n 20");     
       print ("&nbsp;&nbsp;<img src='../imagenes/requerido.gif'><SELECT NAME='programacion20'>");                
 
       $instruccion = "SELECT DISTINCT programacion.cod_programacion AS cod_programacion, ciclo.nombre AS nombre
@@ -642,7 +642,7 @@ session_start();
         print("</SELECT></TD></TR>");   
         
  ////BUSCAMOS LAS PROGRAMACIONES   21
-      print ("<TR style='font-weight:bold; color: white'><TD>Programación 21");
+      print ("<TR style='font-weight:bold; color: white'><TD>Programaciï¿½n 21");
       print ("&nbsp;&nbsp;<img src='../imagenes/requerido.gif'><SELECT NAME='programacion21'>");                
 
       $instruccion = "SELECT DISTINCT programacion.cod_programacion AS cod_programacion, ciclo.nombre AS nombre
@@ -662,7 +662,7 @@ session_start();
         print("</SELECT></TD>");                                                                            
        
      ////BUSCAMOS LAS PROGRAMACIONES   22
-      print ("<TD>Programación 22");     
+      print ("<TD>Programaciï¿½n 22");     
       print ("&nbsp;&nbsp;<img src='../imagenes/requerido.gif'><SELECT NAME='programacion22'>");                
 
       $instruccion = "SELECT DISTINCT programacion.cod_programacion AS cod_programacion, ciclo.nombre AS nombre
@@ -682,7 +682,7 @@ session_start();
         print("</SELECT></TD></TR>");        
        
 ////BUSCAMOS LAS PROGRAMACIONES   23
-      print ("<TR style='font-weight:bold; color: white'><TD>Programación 23");
+      print ("<TR style='font-weight:bold; color: white'><TD>Programaciï¿½n 23");
       print ("&nbsp;&nbsp;<img src='../imagenes/requerido.gif'><SELECT NAME='programacion23'>");                
 
       $instruccion = "SELECT DISTINCT programacion.cod_programacion AS cod_programacion, ciclo.nombre AS nombre
@@ -702,7 +702,7 @@ session_start();
         print("</SELECT></TD>");                                                                     
        
      ////BUSCAMOS LAS PROGRAMACIONES   24
-      print ("<TD>Programación 24");     
+      print ("<TD>Programaciï¿½n 24");     
       print ("&nbsp;&nbsp;<img src='../imagenes/requerido.gif'><SELECT NAME='programacion24'>");                
 
       $instruccion = "SELECT DISTINCT programacion.cod_programacion AS cod_programacion, ciclo.nombre AS nombre
@@ -880,8 +880,13 @@ session_start();
 
         ////ENCABEZADO DE LA TABLA DE RESULTADOS
         $hojaExcel="<TABLE width='80%'>";
-        $hojaExcel.="<TR><TH colspan='8'><center>ACTAS DE DESPACHO -- [Programación: $cod_programacion Y $cod_programacion2 Y $cod_programacion3 Y $cod_programacion4 Y $cod_programacion5 Y $cod_programacion6 Y $cod_programacion7 Y $cod_programacion8 Y $cod_programacion9 Y $cod_programacion10 Y $cod_programacion11 Y $cod_programacion12 Y $cod_programacion13 Y $cod_programacion14 Y $cod_programacion15 Y $cod_programacion16 Y $cod_programacion17 Y $cod_programacion18 Y $cod_programacion19 Y $cod_programacion20 Y $cod_programacion21 Y $cod_programacion22 Y $cod_programacion23 Y $cod_programacion24] $txt_categoria </center></TH></TR>";       
-        $hojaExcel.="<TH><center>Centro de Acopio &nbsp;&nbsp;<a href=javascript:generar_informe_ad($cod_programacion,$cod_programacion2,$cod_programacion3,0,0,0,0,$cod_programacion4,$cod_programacion5,$cod_programacion6,$cod_programacion7,$cod_programacion8,$cod_programacion9,$cod_programacion10,$cod_programacion11,$cod_programacion12,$cod_programacion13,$cod_programacion14,4,$categoria,'$periodo_entrega',$cod_programacion15,$cod_programacion16,$cod_programacion17,$cod_programacion18,$cod_programacion19,$cod_programacion20,$cod_programacion21,$cod_programacion22,$cod_programacion23,$cod_programacion24) title='Totales por Centro de Acopio'><img src='../imagenes/informe.png' width='24' height='24' border='0' alt=''></a> &nbsp;&nbsp;<a href=javascript:generar_informe_ad($cod_programacion,$cod_programacion2,$cod_programacion3,0,0,0,0,$cod_programacion4,$cod_programacion5,$cod_programacion6,$cod_programacion7,$cod_programacion8,$cod_programacion9,$cod_programacion10,$cod_programacion11,$cod_programacion12,$cod_programacion13,$cod_programacion14,5,$categoria,'$periodo_entrega',$cod_programacion15,$cod_programacion16,$cod_programacion17,$cod_programacion18,$cod_programacion19,$cod_programacion20,$cod_programacion21,$cod_programacion22,$cod_programacion23,$cod_programacion24) title='Totales por Centro de Acopio Despacho'><img src='../imagenes/informe_04.png' width='24' height='24' border='0' alt=''></a>&nbsp;&nbsp;<a href=javascript:generar_informe_ad($cod_programacion,$cod_programacion2,$cod_programacion3,0,0,0,0,$cod_programacion4,$cod_programacion5,$cod_programacion6,$cod_programacion7,$cod_programacion8,$cod_programacion9,$cod_programacion10,$cod_programacion11,$cod_programacion12,$cod_programacion13,$cod_programacion14,8,$categoria,'$periodo_entrega',$cod_programacion15,$cod_programacion16,$cod_programacion17,$cod_programacion18,$cod_programacion19,$cod_programacion20,$cod_programacion21,$cod_programacion22,$cod_programacion23,$cod_programacion24) title='Informe de productos por dia'><img src='../imagenes/informe_05.png' width='24' height='24' border='0' alt=''></a></center></TH>";
+        $hojaExcel.="<TR><TH colspan='8'><center>ACTAS DE DESPACHO -- [Programaciï¿½n: $cod_programacion Y $cod_programacion2 Y $cod_programacion3 Y $cod_programacion4 Y $cod_programacion5 Y $cod_programacion6 Y $cod_programacion7 Y $cod_programacion8 Y $cod_programacion9 Y $cod_programacion10 Y $cod_programacion11 Y $cod_programacion12 Y $cod_programacion13 Y $cod_programacion14 Y $cod_programacion15 Y $cod_programacion16 Y $cod_programacion17 Y $cod_programacion18 Y $cod_programacion19 Y $cod_programacion20 Y $cod_programacion21 Y $cod_programacion22 Y $cod_programacion23 Y $cod_programacion24] $txt_categoria </center></TH></TR>";       
+        $hojaExcel.="<TH><center>
+         Centro de Acopio &nbsp;&nbsp;<a href=javascript:generar_informe_ad($cod_programacion,$cod_programacion2,$cod_programacion3,0,0,0,0,$cod_programacion4,$cod_programacion5,$cod_programacion6,$cod_programacion7,$cod_programacion8,$cod_programacion9,$cod_programacion10,$cod_programacion11,$cod_programacion12,$cod_programacion13,$cod_programacion14,4,$categoria,'$periodo_entrega',$cod_programacion15,$cod_programacion16,$cod_programacion17,$cod_programacion18,$cod_programacion19,$cod_programacion20,$cod_programacion21,$cod_programacion22,$cod_programacion23,$cod_programacion24) title='Totales por Centro de Acopio'><img src='../imagenes/informe.png' width='24' height='24' border='0' alt=''></a>&nbsp;&nbsp;
+         <a href=javascript:generar_informe_ad($cod_programacion,$cod_programacion2,$cod_programacion3,0,0,0,0,$cod_programacion4,$cod_programacion5,$cod_programacion6,$cod_programacion7,$cod_programacion8,$cod_programacion9,$cod_programacion10,$cod_programacion11,$cod_programacion12,$cod_programacion13,$cod_programacion14,11,$categoria,'$periodo_entrega',$cod_programacion15,$cod_programacion16,$cod_programacion17,$cod_programacion18,$cod_programacion19,$cod_programacion20,$cod_programacion21,$cod_programacion22,$cod_programacion23,$cod_programacion24) title='Totales por Municipio'><img src='../imagenes/informe_06.png' width='40' height='24' border='0' alt=''></a>&nbsp;&nbsp;
+         <a href=javascript:generar_informe_ad($cod_programacion,$cod_programacion2,$cod_programacion3,0,0,0,0,$cod_programacion4,$cod_programacion5,$cod_programacion6,$cod_programacion7,$cod_programacion8,$cod_programacion9,$cod_programacion10,$cod_programacion11,$cod_programacion12,$cod_programacion13,$cod_programacion14,5,$categoria,'$periodo_entrega',$cod_programacion15,$cod_programacion16,$cod_programacion17,$cod_programacion18,$cod_programacion19,$cod_programacion20,$cod_programacion21,$cod_programacion22,$cod_programacion23,$cod_programacion24) title='Totales por Centro de Acopio Despacho'><img src='../imagenes/informe_04.png' width='24' height='24' border='0' alt=''></a>&nbsp;&nbsp;
+         <a href=javascript:generar_informe_ad($cod_programacion,$cod_programacion2,$cod_programacion3,0,0,0,0,$cod_programacion4,$cod_programacion5,$cod_programacion6,$cod_programacion7,$cod_programacion8,$cod_programacion9,$cod_programacion10,$cod_programacion11,$cod_programacion12,$cod_programacion13,$cod_programacion14,8,$categoria,'$periodo_entrega',$cod_programacion15,$cod_programacion16,$cod_programacion17,$cod_programacion18,$cod_programacion19,$cod_programacion20,$cod_programacion21,$cod_programacion22,$cod_programacion23,$cod_programacion24) title='Informe de productos por dia'><img src='../imagenes/informe_05.png' width='24' height='24' border='0' alt=''></a>
+        </center></TH>";
         $hojaExcel.="<TH><center>Centro Acopio -> Centro Acopio &nbsp;&nbsp;<a href=javascript:generar_informe_ad($cod_programacion,$cod_programacion2,$cod_programacion3,0,0,0,0,$cod_programacion4,$cod_programacion5,$cod_programacion6,$cod_programacion7,$cod_programacion8,$cod_programacion9,$cod_programacion10,$cod_programacion11,$cod_programacion12,$cod_programacion13,$cod_programacion14,$tipo_informe,$categoria,'$periodo_entrega',$cod_programacion15,$cod_programacion16,$cod_programacion17,$cod_programacion18,$cod_programacion19,$cod_programacion20,$cod_programacion21,$cod_programacion22,$cod_programacion23,$cod_programacion24) title='Imprimir Todos'><img src='../imagenes/informe_02.png' width='24' height='24' border='0' alt=''></a></center></TH>";
         $hojaExcel.="<TH><center>Municipio</center></TH>";
         $hojaExcel.="<TH><center>Centro Acopio -> Municipio &nbsp;&nbsp;<a href=javascript:generar_informe_ad($cod_programacion,$cod_programacion2,$cod_programacion3,0,0,0,0,$cod_programacion4,$cod_programacion5,$cod_programacion6,$cod_programacion7,$cod_programacion8,$cod_programacion9,$cod_programacion10,$cod_programacion11,$cod_programacion12,$cod_programacion13,$cod_programacion14,2,$categoria,'$periodo_entrega',$cod_programacion15,$cod_programacion16,$cod_programacion17,$cod_programacion18,$cod_programacion19,$cod_programacion20,$cod_programacion21,$cod_programacion22,$cod_programacion23,$cod_programacion24) title='Imprimir Todos'><img src='../imagenes/informe_03.png' width='24' height='24' border='0' alt=''></a></center></TH>";
@@ -961,7 +966,7 @@ session_start();
       else
          print ("<center><span class='Estilo1'>No hay informacion disponible <br>Debe seleccionar todas las programaciones para ejecutar el informe</span></center>");
 
-////Cerrar conexión
+////Cerrar conexiï¿½n
 mysql_close ($conexion);
 ?>
 </div>

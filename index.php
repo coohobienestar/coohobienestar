@@ -95,7 +95,7 @@ if($estado_servidor == 1){
           <td height="40" align="left" background="imagenes/pie_pagina.gif">
 		  	  <table width="100%"  border="0" cellspacing="0" cellpadding="0">
             <tr>
-              <td align="center"><strong><span class="Estilo2">Un desarrollo a la medida por</span> <span class="Estilo3">Pablo Alejandro Moreno Duque</span></strong></td>
+              <td align="center"><strong><span class="Estilo2">Un desarrollo a la medida por</span> <span class="Estilo3"></span></strong></td>
             </tr>
           </table>
 		      </td>
