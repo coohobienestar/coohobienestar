@@ -297,12 +297,19 @@ $cod_tipo_minuta = $row_0['cod_tipo_minuta'];
         $hojaExcel.="<H1 class=SaltoDePagina>";           
 
         ////DIBUJAMOS EL ENCABEZADO DE LA TABLA
+        // $hojaExcel.="<table width='99%' border='1'>";
+        // $hojaExcel.="<tr>";
+        // $hojaExcel.="<td><img src='../imagenes/$logo'></td>";
+        // $hojaExcel.="<th colspan='$columnas'><div align='center'>ORDEN DE PEDIDO $nom_categoria<BR>$nom_operador NIT $nit <BR> Programacion: $cod_programacion<BR> Ciclo de Menu:&nbsp; $nom_ciclo &nbsp;&nbsp;&nbsp; $cad_menu <BR> $cad_fecha <BR> MUNICIPIO $nom_municipio <BR> $nom_tipo_minuta</div></th>";
+        // $hojaExcel.="</tr>";
+        // $hojaExcel.="</table>";
+        
         $hojaExcel.="<table width='99%' border='1'>";
         $hojaExcel.="<tr>";
-        $hojaExcel.="<td><img src='../imagenes/$logo'></td>";
-        $hojaExcel.="<th colspan='$columnas'><div align='center'>ORDEN DE PEDIDO $nom_categoria<BR>$nom_operador NIT $nit <BR> Programacion: $cod_programacion<BR> Ciclo de Menu:&nbsp; $nom_ciclo &nbsp;&nbsp;&nbsp; $cad_menu <BR> $cad_fecha <BR> MUNICIPIO $nom_municipio <BR> $nom_tipo_minuta</div></th>";
+        $hojaExcel.="<td><center><img src='../imagenes/$logo' width='100' heigth='100' ></center></td>";
+        $hojaExcel.="<th colspan='$columnas'><div align='center'>ORDEN DE PEDIDO $nom_categoria<BR>$nom_operador NIT $nit <BR> Programacion: $cod_programacion <BR> Ciclo de Menu:&nbsp; $nom_ciclo &nbsp;&nbsp;&nbsp; $cad_menu <BR> $cad_fecha <BR> MUNICIPIO $nom_municipio <BR> $nom_tipo_minuta</div></th>";
         $hojaExcel.="</tr>";
-        $hojaExcel.="</table>";        
+        $hojaExcel.="</table>"; 
        
         $hojaExcel.="<table width='99%' border='1'>";
         $hojaExcel.="<tr>";
